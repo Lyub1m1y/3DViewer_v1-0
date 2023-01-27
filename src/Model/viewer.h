@@ -16,20 +16,20 @@
 #endif
 
 typedef struct data_t {
-  int v_count;       // vertexes - количество вершин
-  int p_count;       // polygons - количество полигонов
-  int e_count;       // edges - количество ребер
-  int* edges;        // массив ребер
-  double* vertexes;  // массив вершин
+  int countV;           // количество вершин
+  int countE;           // количество ребер
+  int countP;           // количество полигонов
+  double* arrVertexes;  // массив вершин
+  int* arrEdges;        // массив ребер
 } data_t;
 
 typedef enum coordinate_t { X = 0, Y, Z } coordinate_t;
 
-int parser(data_t* data, char* file_name);
-int find_value(char* str, unsigned int* pos_i);
-int count_calc(char* str);
-void moving(data_t* A, double move, int flag);
-void rotation(data_t* A, double angle, int coordinate);
+int parser(data_t* data, char* fileName);
+int findValue(char* str, unsigned int* posit_i);
+int countingEdges(char* str);
+void moving(data_t* A, double move, int coordinate);
+void affineTransforms(data_t* A, double angle, int coordinate);
 void scaling(data_t* A, double scale);
 
 #endif  // VIEWER_H_
