@@ -19,6 +19,8 @@ MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::initializeGL() {
   char file[] = "";
+  // char file[] =
+  // "/Users/katrinap/Desktop/3DViewer_v1-main/src/objects/gun.obj";
   parser(&structData, file);
   ui->label_info_v->setNum(structData.countV);
   ui->label_info_e->setNum(structData.countE);
@@ -45,7 +47,7 @@ void MainWindow::paintGL() {
   }
   glRotatef(xRot, 1, 0, 0);
   glRotatef(yRot, 0, 1, 0);
-  drawCube();
+  draw();
 }
 
 void MainWindow::saveSettings() {
@@ -86,7 +88,17 @@ void MainWindow::mouseMoveEvent(QMouseEvent* mo) {
   update();
 }
 
-void MainWindow::drawCube() {
+void MainWindow::draw() {
+  // double max_el = 0.0;
+  // for (int i = 0; i < structData.countV; i++) {
+  //   if (max_el < structData.arrVertexes[i]) {
+  //     max_el = structData.arrVertexes[i];
+  //   }
+  // }
+  // for (int i = 0; i < (structData.countV) * 3; i++) {
+  //   structData.arrVertexes[i] /= max_el;
+  // }
+
   glVertexPointer(3, GL_DOUBLE, 0, structData.arrVertexes);
   glEnableClientState(GL_VERTEX_ARRAY);
   if (ui->comboBox_background_color->currentIndex() == 0) {
@@ -193,6 +205,29 @@ void MainWindow::on_pushButton_sc_minus_clicked() {
   scaling(&structData, value);
   update();
 }
+
+// void MainWindow::on_pushButton_sc_plus_clicked() {
+//   if (scaling(&structData, 1 + ui->doubleSpinBox_sc_value->value()) == FAIL)
+//   {
+//     QMessageBox::critical(this, "Invalid expression",
+//                           "the value must not be 0!");
+//   } else {
+//     update();
+//   }
+// }
+
+// void MainWindow::on_pushButton_sc_minus_clicked() {
+//   double value = 1 - ui->doubleSpinBox_sc_value->value();
+//   if (value == 0) {
+//     value = 0.1;
+//   }
+//   if (scaling(&structData, value) == FAIL) {
+//     QMessageBox::critical(this, "Invalid expression",
+//                           "the value must not be 0!");
+//   } else {
+//     update();
+//   }
+// }
 
 void MainWindow::on_pushButton_rt_x_plus_clicked() {
   affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), 0);

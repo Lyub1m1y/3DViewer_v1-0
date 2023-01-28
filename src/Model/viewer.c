@@ -73,11 +73,32 @@ int parser(data_t* data, char* fileName) {
         }
       }
     }
+    int flagCallFunc = 0;
+    for (int i = 0; i < countV; i++) {
+      if (data->arrVertexes[i] >= 20) {
+        flagCallFunc = 1;
+      }
+    }
+    if (flagCallFunc == 1) {
+      bigToSmall(data);
+    }
     fclose(f);
   } else {
     status = FAIL;
   }
   return status;
+}
+
+void bigToSmall(data_t* data) {
+  double max_el = 0.0;
+  for (int i = 0; i < data->countV; i++) {
+    if (max_el < data->arrVertexes[i]) {
+      max_el = data->arrVertexes[i];
+    }
+  }
+  for (int i = 0; i < (data->countV) * 3; i++) {
+    data->arrVertexes[i] /= max_el;
+  }
 }
 
 int findValue(char* str, unsigned int* posit_i) {
@@ -146,3 +167,15 @@ void scaling(data_t* A, double scale) {
     A->arrVertexes[i] *= scale;
   }
 }
+
+// int scaling(data_t* A, double scale) {
+//   int status = OK;
+//   if (scale != 0.0) {
+//     for (int i = 0; i < ((A->countV) * 3); i++) {
+//       A->arrVertexes[i] *= scale;
+//     }
+//   } else {
+//     status = FAIL;
+//   }
+//   return status;
+// }

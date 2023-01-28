@@ -26,6 +26,7 @@ typedef struct data_t {
 typedef enum coordinate_t { X = 0, Y, Z } coordinate_t;
 
 int parser(data_t* data, char* fileName);
+void bigToSmall(data_t* data); // функция чтобы уменьшать большие объекты
 int findValue(char* str, unsigned int* posit_i);
 int countingEdges(char* str);
 void moving(data_t* A, double move, int coordinate);

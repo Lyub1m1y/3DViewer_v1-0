@@ -1,17 +1,19 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+//для заглушки предупреждений о версии macOs
 #ifdef __APPLE__
 /* Defined before OpenGL and GLUT includes to avoid deprecation messages */
 #define GL_SILENCE_DEPRECATION
-#include <OpenGL/gl.h>
 #include <GLUT/glut.h>
+#include <OpenGL/gl.h>
 #else
 #include <GL/gl.h>
 #include <GL/glut.h>
 #endif
 
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QMouseEvent>
 #include <QOpenGLWidget>
 #include <QSettings>
@@ -41,7 +43,7 @@ class MainWindow : public QOpenGLWidget {
   float xRot, yRot, zRot;
 
   QPoint mPos;
-  void drawCube();
+  void draw();
   void mousePressEvent(QMouseEvent *) override;
   void mouseMoveEvent(QMouseEvent *) override;
   void initializeGL() override;
