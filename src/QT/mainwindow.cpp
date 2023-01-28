@@ -18,9 +18,8 @@ data_t structData;
 MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::initializeGL() {
-  char first_name[] =
-      "/Users/katrinap/Desktop/3DViewer_v1-main/src/objects/cube.obj";
-  parser(&structData, first_name);
+  char file[] = "";
+  parser(&structData, file);
   ui->label_info_v->setNum(structData.countV);
   ui->label_info_e->setNum(structData.countE);
   ui->label_info_p->setNum(structData.countP);

@@ -60,19 +60,23 @@ clean:
 	@rm -rf **/moc_predefs.h
 	@rm -rf **/viewer
 	@rm -rf 3DViewer_v1-0
+	@rm -rf ../Archive_3DViewer_v1-0/
 	@rm -rf QT/3DViewer_v1-0.app
 	@rm -rf **/3DViewer_v1-0.dSYM
 	@rm -rf GcovReport
+	@rm -rf ../.DS_Store
+	@rm -rf .DS_Store
 
 dvi:
 	open ./Help/index.html
 
-
-# dist: 
-# 	rm -rf ../Archive_3DViewer_v1-0/
-# 	mkdir ../Archive_3DViewer_v1-0/
-# 	cp -a -r **/ *.* Makefile 3DViewer_v1-0 ../Archive_3DViewer_v1-0
-# 	cd ../ && tar -cvzf Archive_3DViewer_v1-0.tar.gz Archive_3DViewer_v1-0
+dist: 
+	rm -rf ../Archive_3DViewer_v1-0/
+	mkdir ../Archive_3DViewer_v1-0/
+	ls -la
+	cp -r ../src ../Archive_3DViewer_v1-0
+	cd ../ && tar -cvzf Archive_3DViewer_v1-0.tar.gz Archive_3DViewer_v1-0
+	rm -rf ../Archive_3DViewer_v1-0/
 
 test:
 	@$(CC) $(CFLAGS) $(TEST) $(SRC_FOR_TEST) $(FLAGS_PLATFORM) -o test.out
