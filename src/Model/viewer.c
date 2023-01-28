@@ -118,13 +118,13 @@ int countingEdges(char* str) {
 }
 
 void moving(data_t* A, double move, int coordinate) {
-  for (unsigned int i = 0; i < A->countV; i++) {
+  for (int i = 0; i < (A->countV); i++) {
     A->arrVertexes[i * 3 + coordinate] += move;
   }
 }
 
 void affineTransforms(data_t* A, double angle, int coordinate) {
-  for (unsigned int i = 0; i < A->countV; i++) {
+  for (int i = 0; i < (A->countV); i++) {
     double x = A->arrVertexes[i * 3];
     double y = A->arrVertexes[i * 3 + 1];
     double z = A->arrVertexes[i * 3 + 2];
@@ -142,7 +142,7 @@ void affineTransforms(data_t* A, double angle, int coordinate) {
 }
 
 void scaling(data_t* A, double scale) {
-  for (unsigned int i = 0; i < A->countV * 3; i++) {
+  for (int i = 0; i < ((A->countV) * 3); i++) {
     A->arrVertexes[i] *= scale;
   }
 }

@@ -18,7 +18,7 @@ data_t structData;
 MainWindow::~MainWindow() { delete ui; }
 
 void MainWindow::initializeGL() {
-  char* first_name =
+  char first_name[] =
       "/Users/katrinap/Desktop/3DViewer_v1-main/src/objects/cube.obj";
   parser(&structData, first_name);
   ui->label_info_v->setNum(structData.countV);
@@ -117,6 +117,7 @@ void MainWindow::drawCube() {
     glLineStipple(10, 0x3333);
     glEnable(GL_LINE_STIPPLE);
   }
+  glLineWidth(ui->spinBox_edges_size->value());
   glDrawElements(GL_LINES, structData.countE * 2, GL_UNSIGNED_INT,
                  structData.arrEdges);
   glDisableClientState(GL_VERTEX_ARRAY);
@@ -246,7 +247,7 @@ void MainWindow::on_comboBox_background_color_activated() {
 void MainWindow::on_pushButton_select_name_clicked() {
   QString str;
   str = QFileDialog::getOpenFileName(this, "Select File",
-                                     "..\\3dShlyap\\objects\\");
+                                     "..\\QT\\objects\\");
   QFileInfo fileinfo(str);
   QString F = fileinfo.fileName();
   ui->label_object_name->setText(F);
