@@ -43,6 +43,8 @@ clean:
 	@rm -rf **/**.o **.o
 	@rm -rf $(EXECUTABLE)
 	@rm -rf gcov_report
+	@rm -rf .DS_Store
+	@rm -rf **/.DS_Store
 	@rm -rf report
 	@rm -rf CPPLINT.cfg
 	@rm -rf *.gcda
@@ -53,24 +55,24 @@ clean:
 	@rm -rf gcov_test
 	@rm -rf .clang-format
 	@rm -rf ../Archive_3DViewer_v1-0.*
-	@rm -rf build-SmartCalc_v1-0-0-Desktop-Release/
-	@rm -rf build-SmartCalc_v1-0-0-Desktop_x86_darwin_generic_mach_o_64bit-Debug
+	@rm -rf build-3DViewer_v1-0-Desktop-Release/
+	@rm -rf build-3DViewer_v1-0-Desktop_x86_darwin_generic_mach_o_64bit-Debug
 	@rm -rf **/moc_predefs.h
-	@rm -rf **/smartcalc
-	@rm -rf **/SmartCalc_v1-0-0
-	@rm -rf View/SmartCalc_v1-0-0.app
-	@rm -rf **/smartcalc.dSYM
+	@rm -rf **/viewer
+	@rm -rf 3DViewer_v1-0
+	@rm -rf QT/3DViewer_v1-0.app
+	@rm -rf **/3DViewer_v1-0.dSYM
 	@rm -rf GcovReport
 
 dvi:
 	open ./Help/index.html
 
 
-dist: 
-	rm -rf ../Archive_SmartCalc_v1.0/
-	mkdir ../Archive_SmartCalc_v1.0/
-	cp -a -r **/ *.* Makefile SmartCalc_v1-0-0 ../Archive_SmartCalc_v1.0
-	cd ../ && tar -cvzf Archive_SmartCalc_v1.0.tar.gz Archive_SmartCalc_v1.0
+# dist: 
+# 	rm -rf ../Archive_3DViewer_v1-0/
+# 	mkdir ../Archive_3DViewer_v1-0/
+# 	cp -a -r **/ *.* Makefile 3DViewer_v1-0 ../Archive_3DViewer_v1-0
+# 	cd ../ && tar -cvzf Archive_3DViewer_v1-0.tar.gz Archive_3DViewer_v1-0
 
 test:
 	@$(CC) $(CFLAGS) $(TEST) $(SRC_FOR_TEST) $(FLAGS_PLATFORM) -o test.out
@@ -88,7 +90,7 @@ gcov_report:
 	rm -rf *.dSYM
 
 open:
-	./SmartCalc_v1-0-0
+	./3DViewer_v1-0
 
 check: 
 	@echo -------------------STYLE_TEST-------------------

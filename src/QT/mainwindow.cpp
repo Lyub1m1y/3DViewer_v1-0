@@ -247,7 +247,7 @@ void MainWindow::on_comboBox_background_color_activated() {
 void MainWindow::on_pushButton_select_name_clicked() {
   QString str;
   str = QFileDialog::getOpenFileName(this, "Select File",
-                                     "..\\QT\\objects\\");
+                                     "..\\3DViewer_v1-0\\objects\\");
   QFileInfo fileinfo(str);
   QString F = fileinfo.fileName();
   ui->label_object_name->setText(F);
