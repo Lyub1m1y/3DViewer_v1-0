@@ -138,36 +138,99 @@ int countingEdges(char* str) {
   return count;
 }
 
-void moving(data_t* A, double move, int coordinate) {
-  for (int i = 0; i < (A->countV); i++) {
-    A->arrVertexes[i * 3 + coordinate] += move;
+void moving(data_t* structData, double move, int coordinate) {
+  for (int i = 0; i < (structData->countV); i++) {
+    structData->arrVertexes[i * 3 + coordinate] += move;
   }
 }
 
-void affineTransforms(data_t* A, double angle, int coordinate) {
-  for (int i = 0; i < (A->countV); i++) {
-    double x = A->arrVertexes[i * 3];
-    double y = A->arrVertexes[i * 3 + 1];
-    double z = A->arrVertexes[i * 3 + 2];
-    if (coordinate == 0) {
-      A->arrVertexes[i * 3 + 1] = cos(angle) * y - sin(angle) * z;
-      A->arrVertexes[i * 3 + 2] = sin(angle) * y + cos(angle) * z;
-    } else if (coordinate == 1) {
-      A->arrVertexes[i * 3] = cos(angle) * x + sin(angle) * z;
-      A->arrVertexes[i * 3 + 2] = (-sin(angle)) * x + cos(angle) * z;
-    } else if (coordinate == 2) {
-      A->arrVertexes[i * 3] = cos(angle) * x - sin(angle) * y;
-      A->arrVertexes[i * 3 + 1] = sin(angle) * x + cos(angle) * y;
+void affineTransforms(data_t* structData, double angle, int coordinate) {
+  for (int i = 0; i < (structData->countV); i++) {
+    double x = structData->arrVertexes[i * 3];
+    double y = structData->arrVertexes[i * 3 + 1];
+    double z = structData->arrVertexes[i * 3 + 2];
+    if (coordinate == X) {
+      structData->arrVertexes[i * 3 + 1] = cos(angle) * y - sin(angle) * z;
+      structData->arrVertexes[i * 3 + 2] = sin(angle) * y + cos(angle) * z;
+    } else if (coordinate == Y) {
+      structData->arrVertexes[i * 3] = cos(angle) * x + sin(angle) * z;
+      structData->arrVertexes[i * 3 + 2] = (-sin(angle)) * x + cos(angle) * z;
+    } else if (coordinate == Z) {
+      structData->arrVertexes[i * 3] = cos(angle) * x - sin(angle) * y;
+      structData->arrVertexes[i * 3 + 1] = sin(angle) * x + cos(angle) * y;
     }
   }
 }
+// TODO deleate
+//  void affineTransforms(data_t* structData, double angle, int coordinate) {
+//    for (int i = 0; i < (structData->countV); i += 3) {
+//      double x = 0.0;
+//      double y = 0.0;
+//      double z = 0.0;
+//      if (coordinate == X) {
+//        angle *= RAD_TO_GRAD;
+//        y = structData->arrVertexes[i + 1];
+//        z = structData->arrVertexes[i + 2];
+//        structData->arrVertexes[i + 1] = y * cos(angle) + z * sin(angle);
+//        structData->arrVertexes[i + 2] = -y * sin(angle) + z * cos(angle);
+//      } else if (coordinate == Y) {
+//        angle *= -RAD_TO_GRAD;
+//        x = structData->arrVertexes[i];
+//        z = structData->arrVertexes[i + 2];
+//        structData->arrVertexes[i] = x * cos(angle) + z * sin(angle);
+//        structData->arrVertexes[i + 2] = -x * sin(angle) + z * cos(angle);
+//      } else if (coordinate == Z) {
+//        angle *= RAD_TO_GRAD;
+//        x = structData->arrVertexes[i];
+//        y = structData->arrVertexes[i + 1];
+//        structData->arrVertexes[i] = x * cos(angle) + y * sin(angle);
+//        structData->arrVertexes[i + 1] = -x * sin(angle) + y * cos(angle);
+//      }
+//    }
+//  }
 
-void scaling(data_t* A, double scale) {
-  for (int i = 0; i < ((A->countV) * 3); i++) {
-    A->arrVertexes[i] *= scale;
+// void scaling(data_t* structData, double scale) {
+//   for (int i = 0; i < ((structData->countV) * 3); i++) {
+//     structData->arrVertexes[i] *= scale;
+//   }
+// }
+
+void scaling(data_t* structData, double scale, int coordinate) {
+  int i = coordinate;
+  if (coordinate == ALL) {
+    i = 0;
+  }
+  while (i < ((structData->countV) * 3)) {
+    structData->arrVertexes[i] *= scale;
+    if (coordinate == ALL) {
+      i++;
+    } else {
+      i += 3;
+    }
   }
 }
+// TODO deleate
+// int scale_x(obj_t* obj, double koff) {
+//   for (int i = 0; i < obj->count_of_vertexes * 3; i += 3) {
+//     obj->vertexes[i] *= koff;
+//   }
 
+//   return res;
+// }
+
+// int scale_y(obj_t* obj, double koff) {
+//   for (int i = 1; i < obj->count_of_vertexes * 3; i += 3) {
+//     obj->vertexes[i] *= koff;
+//   }
+// }
+
+// int scale_z(obj_t* obj, double koff) {
+//   for (int i = 2; i < obj->count_of_vertexes * 3; i += 3) {
+//     obj->vertexes[i] *= koff;
+//   }
+// }
+
+// TODO deleate
 // int scaling(data_t* A, double scale) {
 //   int status = OK;
 //   if (scale != 0.0) {

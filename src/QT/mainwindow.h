@@ -40,6 +40,8 @@ class MainWindow : public QOpenGLWidget {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
+  data_t structData;
+
   float xRot, yRot, zRot;
 
   QPoint mPos;
@@ -56,7 +58,7 @@ class MainWindow : public QOpenGLWidget {
   QTimer *timer;
   QImage image;
 
-  QGifImage *gif;
+  //  QGifImage *gif;
   int framcountE;
   int i = 0;
 
@@ -67,8 +69,6 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_mv_y_minus_clicked();
   void on_pushButton_mv_z_minus_clicked();
   void on_pushButton_mv_z_plus_clicked();
-  void on_pushButton_sc_plus_clicked();
-  void on_pushButton_sc_minus_clicked();
   void on_pushButton_rt_x_plus_clicked();
   void on_pushButton_rt_x_minus_clicked();
   void on_pushButton_rt_y_plus_clicked();
@@ -87,10 +87,27 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_save_settings_clicked();
   void on_pushButton_screenshot_clicked();
   void on_pushButton_gif_clicked();
+
   void gif_creator();
+  void gif_timer();
+  void error_message(QString message);
+
+  void on_pushButton_sc_all_plus_clicked();
+  void on_pushButton_sc_x_plus_clicked();
+  void on_pushButton_sc_y_plus_clicked();
+  void on_pushButton_sc_z_plus_clicked();
+  void on_pushButton_sc_all_minus_clicked();
+  void on_pushButton_sc_x_minus_clicked();
+  void on_pushButton_sc_y_minus_clicked();
+  void on_pushButton_sc_z_minus_clicked();
 
  private:
   Ui::MainWindow *ui;
+
+  int numberFps;
+  QTimer *gifTmr;
+  QGifImage *gif_img_;
+  QString gifFileName;
   QSettings *settings;
 };
 #endif  // MAINWINDOW_H

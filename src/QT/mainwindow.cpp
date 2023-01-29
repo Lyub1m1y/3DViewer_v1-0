@@ -10,17 +10,20 @@ MainWindow::MainWindow(QWidget* parent)
   loadSettings();
   framcountE = 0;
   timer = new QTimer(this);
-  connect(timer, &QTimer::timeout, this, &MainWindow::gif_creator);
+  //  connect(timer, &QTimer::timeout, this, &MainWindow::gif_creator);
+  gifTmr = new QTimer();
+  connect(gifTmr, SIGNAL(timeout()), this, SLOT(gif_creator()));
 }
 
-data_t structData;
-
-MainWindow::~MainWindow() { delete ui; }
+MainWindow::~MainWindow() {
+  gifTmr->~QTimer();
+  delete ui;
+}
 
 void MainWindow::initializeGL() {
-  char file[] = "";
-  // char file[] =
-  // "/Users/katrinap/Desktop/3DViewer_v1-main/src/objects/gun.obj";
+  //  char file[] = "";
+  // TODO deleate
+  char file[] = "/Users/katrinap/Desktop/3DViewer_v1-main/src/objects/gun.obj";
   parser(&structData, file);
   ui->label_info_v->setNum(structData.countV);
   ui->label_info_e->setNum(structData.countE);
@@ -192,70 +195,85 @@ void MainWindow::on_pushButton_mv_z_plus_clicked() {
   update();
 }
 
-void MainWindow::on_pushButton_sc_plus_clicked() {
-  scaling(&structData, 1 + ui->doubleSpinBox_sc_value->value());
+void MainWindow::on_pushButton_sc_all_plus_clicked() {
+  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  scaling(&structData, value, ALL);
   update();
 }
 
-void MainWindow::on_pushButton_sc_minus_clicked() {
+void MainWindow::on_pushButton_sc_x_plus_clicked() {
+  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  scaling(&structData, value, X);
+  update();
+}
+
+void MainWindow::on_pushButton_sc_y_plus_clicked() {
+  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  scaling(&structData, value, Y);
+  update();
+}
+
+void MainWindow::on_pushButton_sc_z_plus_clicked() {
+  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  scaling(&structData, value, Z);
+  update();
+}
+
+void MainWindow::on_pushButton_sc_all_minus_clicked() {
   double value = 1 - ui->doubleSpinBox_sc_value->value();
   if (value == 0) {
-    value = 0.1;
+    // value = 0.1;
+    value = -0.1;
   }
-  scaling(&structData, value);
+  scaling(&structData, value, ALL);
   update();
 }
 
-// void MainWindow::on_pushButton_sc_plus_clicked() {
-//   if (scaling(&structData, 1 + ui->doubleSpinBox_sc_value->value()) == FAIL)
-//   {
-//     QMessageBox::critical(this, "Invalid expression",
-//                           "the value must not be 0!");
-//   } else {
-//     update();
-//   }
-// }
+void MainWindow::on_pushButton_sc_x_minus_clicked() {
+  double value = 1 - ui->doubleSpinBox_sc_value->value();
+  scaling(&structData, value, X);
+  update();
+}
 
-// void MainWindow::on_pushButton_sc_minus_clicked() {
-//   double value = 1 - ui->doubleSpinBox_sc_value->value();
-//   if (value == 0) {
-//     value = 0.1;
-//   }
-//   if (scaling(&structData, value) == FAIL) {
-//     QMessageBox::critical(this, "Invalid expression",
-//                           "the value must not be 0!");
-//   } else {
-//     update();
-//   }
-// }
+void MainWindow::on_pushButton_sc_y_minus_clicked() {
+  double value = 1 - ui->doubleSpinBox_sc_value->value();
+  scaling(&structData, value, Y);
+  update();
+}
+
+void MainWindow::on_pushButton_sc_z_minus_clicked() {
+  double value = 1 - ui->doubleSpinBox_sc_value->value();
+  scaling(&structData, value, Z);
+  update();
+}
 
 void MainWindow::on_pushButton_rt_x_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), 0);
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), X);
   update();
 }
 
 void MainWindow::on_pushButton_rt_x_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, 0);
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, X);
   update();
 }
 
 void MainWindow::on_pushButton_rt_y_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), 1);
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Y);
   update();
 }
 
 void MainWindow::on_pushButton_rt_y_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, 1);
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Y);
   update();
 }
 
 void MainWindow::on_pushButton_rt_z_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), 2);
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Z);
   update();
 }
 
 void MainWindow::on_pushButton_rt_z_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, 2);
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Z);
   update();
 }
 
@@ -273,10 +291,7 @@ void MainWindow::on_comboBox_edges_type_activated() { update(); }
 
 void MainWindow::on_comboBox_edges_color_activated() { update(); }
 
-void MainWindow::on_comboBox_background_color_activated() {
-  //    repaint();
-  update();
-}
+void MainWindow::on_comboBox_background_color_activated() { update(); }
 
 void MainWindow::on_pushButton_select_name_clicked() {
   QString str;
@@ -300,33 +315,48 @@ void MainWindow::on_pushButton_save_settings_clicked() { saveSettings(); }
 void MainWindow::on_pushButton_screenshot_clicked() {
   QFileDialog file_dialog_img(this);
   QString f_name = file_dialog_img.getSaveFileName(
-      this, tr("Save a screenshot"), "", tr("image (*.bmp *.jpeg)"));
+      this, tr("Save a screenshot"), ".jpeg", tr("image (*.bmp *.jpeg)"));
   QImage img = grabFramebuffer();
   img.save(f_name);
 }
 
 void MainWindow::on_pushButton_gif_clicked() {
-  gif = new QGifImage;
-  gif->setDefaultDelay(100);
+  gifFileName = QFileDialog::getSaveFileName(this, tr("Save GIF"), ".gif",
+                                             tr("Gif Files (*.gif)"));
+  if (gifFileName != "") {
+    ui->pushButton_gif->setDisabled(true);
+    gif_img_ = new QGifImage;
+    gif_img_->setDefaultDelay(10);
+    gif_timer();
+  } else {
+    error_message("Нет папки");
+  }
+}
 
-  timer->start(500);
+void MainWindow::gif_timer() {
+  gifTmr->setInterval(100);
+  gifTmr->start();
+}
+
+void MainWindow::error_message(QString message) {
+  QMessageBox messageBox;
+  messageBox.setFixedSize(500, 200);
+  messageBox.information(0, "Info", message);
 }
 
 void MainWindow::gif_creator() {
-  if (framcountE < 30) {
-    image = grabFramebuffer();
-    gif->addFrame(image);
-    framcountE++;
-
-    i++;
-    ui->hz->setNum(i);
-  } else {
-    framcountE = 0;
-    timer->stop();
-
-    QFileDialog file_dialog_gif(this);
-    QString f_name_gif = file_dialog_gif.getSaveFileName(this, tr("Save a gif"),
-                                                         "", tr("gif (*.gif)"));
-    gif->save(f_name_gif);
+  QImage image = grabFramebuffer();
+  gif_img_->addFrame(image);
+  if (numberFps == 50) {
+    gifTmr->stop();
+    gif_img_->save(gifFileName);
+    numberFps = 0;
+    error_message("Gif saved.");
+    gif_img_->~QGifImage();
+    ui->pushButton_gif->setText("Gif");
+    ui->pushButton_gif->setEnabled(true);
   }
+  ++numberFps;
+  if (!ui->pushButton_gif->isEnabled())
+    ui->pushButton_gif->setText(QString::number(numberFps / 10));
 }
