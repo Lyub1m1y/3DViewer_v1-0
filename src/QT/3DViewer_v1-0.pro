@@ -12,12 +12,12 @@ include(QtGifImage-master/src/gifimage/qtgifimage.pri) # подключение 
 
 SOURCES += \
     ../main.cpp \
-    mainwindow.cpp \
-    ../Model/viewer.c
+    ../Model/viewer.c \
+    mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h \
-    ../Model/viewer.h
+    ../Model/viewer.h \
+    mainwindow.h
 FORMS += \
     mainwindow.ui
 

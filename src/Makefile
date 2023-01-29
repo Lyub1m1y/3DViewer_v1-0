@@ -57,6 +57,7 @@ clean:
 	@rm -rf ../Archive_3DViewer_v1-0.*
 	@rm -rf build-3DViewer_v1-0-Desktop-Release/
 	@rm -rf build-3DViewer_v1-0-Desktop_x86_darwin_generic_mach_o_64bit-Debug
+	@rm -rf QT/build-QT-Desktop_x86_darwin_generic_mach_o_64bit-Debug
 	@rm -rf **/moc_predefs.h
 	@rm -rf **/viewer
 	@rm -rf 3DViewer_v1-0

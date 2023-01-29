@@ -22,7 +22,7 @@
 #include <QWidget>
 
 #include "qgifimage.h"
-
+#include <qgroupbox.h>
 extern "C" {
 #include "../Model/viewer.h"
 }
@@ -58,7 +58,8 @@ class MainWindow : public QOpenGLWidget {
   QTimer *timer;
   QImage image;
 
-  //  QGifImage *gif;
+  double fon_r_, fon_g_, fon_b_;
+
   int framcountE;
   int i = 0;
 
@@ -88,6 +89,10 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_screenshot_clicked();
   void on_pushButton_gif_clicked();
 
+  void on_horizontalScrollBar_bgr_R_valueChanged(int value);
+  void on_horizontalScrollBar_bgr_G_valueChanged(int value);
+  void on_horizontalScrollBar_bgr_B_valueChanged(int value);
+
   void gif_creator();
   void gif_timer();
   void error_message(QString message);
@@ -101,7 +106,7 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_sc_y_minus_clicked();
   void on_pushButton_sc_z_minus_clicked();
 
- private:
+private:
   Ui::MainWindow *ui;
 
   int numberFps;
