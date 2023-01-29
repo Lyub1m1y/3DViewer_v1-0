@@ -895,7 +895,7 @@
      <string>-</string>
     </property>
    </widget>
-   <widget class="QDoubleSpinBox" name="doubleSpinBox_sc_value">
+   <widget class="QDoubleSpinBox" name="doubleSpinBox_sc_all_value">
     <property name="geometry">
      <rect>
       <x>100</x>

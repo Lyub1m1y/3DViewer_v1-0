@@ -196,53 +196,61 @@ void MainWindow::on_pushButton_mv_z_plus_clicked() {
 }
 
 void MainWindow::on_pushButton_sc_all_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  double value = 1 + ui->doubleSpinBox_sc_all_value->value();
   scaling(&structData, value, ALL);
   update();
 }
 
 void MainWindow::on_pushButton_sc_x_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  double value = 1 + ui->doubleSpinBox_sc_x_value->value();
   scaling(&structData, value, X);
   update();
 }
 
 void MainWindow::on_pushButton_sc_y_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  double value = 1 + ui->doubleSpinBox_sc_y_value->value();
   scaling(&structData, value, Y);
   update();
 }
 
 void MainWindow::on_pushButton_sc_z_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_value->value();
+  double value = 1 + ui->doubleSpinBox_sc_z_value->value();
   scaling(&structData, value, Z);
   update();
 }
 
 void MainWindow::on_pushButton_sc_all_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_value->value();
+  double value = 1 - ui->doubleSpinBox_sc_all_value->value();
   if (value == 0) {
-    // value = 0.1;
-    value = -0.1;
+    value = 0.1;
   }
   scaling(&structData, value, ALL);
   update();
 }
 
 void MainWindow::on_pushButton_sc_x_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_value->value();
+  double value = 1 - ui->doubleSpinBox_sc_x_value->value();
+  if (value == 0) {
+    value = 0.1;
+  }
   scaling(&structData, value, X);
   update();
 }
 
 void MainWindow::on_pushButton_sc_y_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_value->value();
+  double value = 1 - ui->doubleSpinBox_sc_y_value->value();
+  if (value == 0) {
+    value = 0.1;
+  }
   scaling(&structData, value, Y);
   update();
 }
 
 void MainWindow::on_pushButton_sc_z_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_value->value();
+  double value = 1 - ui->doubleSpinBox_sc_z_value->value();
+  if (value == 0) {
+    value = 0.1;
+  }
   scaling(&structData, value, Z);
   update();
 }
