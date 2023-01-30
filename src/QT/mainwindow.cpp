@@ -8,18 +8,18 @@ MainWindow::MainWindow(QWidget* parent)
 
   settings = new QSettings(this);
   loadSettings();
-  framcountE = 0;
+  framCountE = 0;
   timer = new QTimer(this);
-  //  connect(timer, &QTimer::timeout, this, &MainWindow::gif_creator);
   gifTmr = new QTimer();
   connect(gifTmr, SIGNAL(timeout()), this, SLOT(gif_creator()));
-  fon_r_ = 0.0, fon_g_ = 0.0, fon_b_ = 0.0;
-  line_r_ = 0.0, line_g_ = 0.0, line_b_ = 0.0;
-  dot_r_ = 0.0, dot_g_ = 0.0, dot_b_ = 0.0;
+  structData.arrEdges = NULL;
+  structData.arrVertexes = NULL;
 }
 
 MainWindow::~MainWindow() {
   gifTmr->~QTimer();
+  delete structData.arrEdges;
+  delete structData.arrVertexes;
   delete ui;
 }
 
@@ -78,12 +78,12 @@ void MainWindow::saveSettings() {
   settings->setValue("horizontalScrollBar_edges_B",
                      ui->horizontalScrollBar_edges_B->value());
 
-  settings->setValue("horizontalScrollBar_8",
-                     ui->horizontalScrollBar_8->value());
-  settings->setValue("horizontalScrollBar_9",
-                     ui->horizontalScrollBar_9->value());
-  settings->setValue("horizontalScrollBar_10",
-                     ui->horizontalScrollBar_10->value());
+  settings->setValue("horizontalScrollBar_vertexes_R",
+                     ui->horizontalScrollBar_vertexes_R->value());
+  settings->setValue("horizontalScrollBar_vertexes_G",
+                     ui->horizontalScrollBar_vertexes_G->value());
+  settings->setValue("horizontalScrollBar_vertexes_B",
+                     ui->horizontalScrollBar_vertexes_B->value());
 }
 
 void MainWindow::loadSettings() {
@@ -113,14 +113,16 @@ void MainWindow::loadSettings() {
   ui->horizontalScrollBar_edges_B->setValue(
       settings->value("horizontalScrollBar_edges_B").toInt());
 
-  ui->horizontalScrollBar_8->setValue(
-      settings->value("horizontalScrollBar_8").toInt());
-  ui->horizontalScrollBar_9->setValue(
-      settings->value("horizontalScrollBar_9").toInt());
-  ui->horizontalScrollBar_10->setValue(
-      settings->value("horizontalScrollBar_10").toInt());
+  ui->horizontalScrollBar_vertexes_R->setValue(
+      settings->value("horizontalScrollBar_vertexes_R").toInt());
+  ui->horizontalScrollBar_vertexes_G->setValue(
+      settings->value("horizontalScrollBar_vertexes_G").toInt());
+  ui->horizontalScrollBar_vertexes_B->setValue(
+      settings->value("horizontalScrollBar_vertexes_B").toInt());
 }
+
 void MainWindow::mousePressEvent(QMouseEvent* mo) { mPos = mo->pos(); }
+
 void MainWindow::mouseMoveEvent(QMouseEvent* mo) {
   xRot = 1 / M_PI * (mo->pos().y() - mPos.y());
   yRot = 1 / M_PI * (mo->pos().x() - mPos.x());
@@ -128,28 +130,15 @@ void MainWindow::mouseMoveEvent(QMouseEvent* mo) {
 }
 
 void MainWindow::draw() {
-  // double max_el = 0.0;
-  // for (int i = 0; i < structData.countV; i++) {
-  //   if (max_el < structData.arrVertexes[i]) {
-  //     max_el = structData.arrVertexes[i];
-  //   }
-  // }
-  // for (int i = 0; i < (structData.countV) * 3; i++) {
-  //   structData.arrVertexes[i] /= max_el;
-  // }
-
   glVertexPointer(3, GL_DOUBLE, 0, structData.arrVertexes);
   glEnableClientState(GL_VERTEX_ARRAY);
 
-  glClearColor(fon_r_, fon_g_, fon_b_, 0.0f);
+  glClearColor(bgrClrR, bgrClrG, bgrClrB, 0.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   // draw edges
   glLineWidth(0.1);
-  if ((!line_r_) && (!line_g_) && (!line_b_)) {
-    line_b_ = 0.9;
-  }
-  glColor3f(line_r_, line_g_, line_b_);
+  glColor3f(edgClrR, edgClrG, edgClrB);
   if (ui->comboBox_edges_type->currentIndex() == 0) {
     glDisable(GL_LINE_STIPPLE);
   } else if (ui->comboBox_edges_type->currentIndex() == 1) {
@@ -163,13 +152,10 @@ void MainWindow::draw() {
 
   // draw vertexes
   glLineWidth(0.1);
-  if ((!dot_r_) && (!dot_g_) && (!dot_b_)) {
-    dot_r_ = 0.9;
-  }
   if (ui->vertexes_type->currentIndex() == 0) {
   } else {
     glEnableClientState(GL_VERTEX_ARRAY);
-    glColor3f(dot_r_, dot_g_, dot_b_);
+    glColor3f(vertClrR, vertClrG, vertClrB);
 
     if (ui->vertexes_type->currentIndex() == 1) {
       glEnable(GL_POINT_SMOOTH);
@@ -355,8 +341,8 @@ void MainWindow::on_pushButton_gif_clicked() {
                                              tr("Gif Files (*.gif)"));
   if (gifFileName != "") {
     ui->pushButton_gif->setDisabled(true);
-    gif_img_ = new QGifImage;
-    gif_img_->setDefaultDelay(10);
+    gifImg = new QGifImage;
+    gifImg->setDefaultDelay(10);
     gif_timer();
   } else {
     error_message("Нет папки");
@@ -376,13 +362,13 @@ void MainWindow::error_message(QString message) {
 
 void MainWindow::gif_creator() {
   QImage image = grabFramebuffer();
-  gif_img_->addFrame(image);
+  gifImg->addFrame(image);
   if (numberFps == 50) {
     gifTmr->stop();
-    gif_img_->save(gifFileName);
+    gifImg->save(gifFileName);
     numberFps = 0;
     error_message("Gif saved.");
-    gif_img_->~QGifImage();
+    gifImg->~QGifImage();
     ui->pushButton_gif->setText("Gif");
     ui->pushButton_gif->setEnabled(true);
   }
@@ -393,48 +379,48 @@ void MainWindow::gif_creator() {
 
 // bgr color
 void MainWindow::on_horizontalScrollBar_bgr_R_valueChanged(int value) {
-  fon_r_ = ((double)value) / 100.0;
+  bgrClrR = ((double)value) / 100.0;
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_bgr_G_valueChanged(int value) {
-  fon_g_ = ((double)value) / 100.0;
+  bgrClrG = ((double)value) / 100.0;
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_bgr_B_valueChanged(int value) {
-  fon_b_ = ((double)value) / 100.0;
+  bgrClrB = ((double)value) / 100.0;
   update();
 }
 
 // edges color
 void MainWindow::on_horizontalScrollBar_edges_R_valueChanged(int value) {
-  line_r_ = ((double)value) / 100.0;
+  edgClrR = ((double)value) / 100.0;
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_edges_G_valueChanged(int value) {
-  line_g_ = ((double)value) / 100.0;
+  edgClrG = ((double)value) / 100.0;
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_edges_B_valueChanged(int value) {
-  line_b_ = ((double)value) / 100.0;
+  edgClrB = ((double)value) / 100.0;
   update();
 }
 
 // vertexes color
-void MainWindow::on_horizontalScrollBar_8_valueChanged(int value) {
-  dot_r_ = (double)value / 100.0;
+void MainWindow::on_horizontalScrollBar_vertexes_R_valueChanged(int value) {
+  vertClrR = (double)value / 100.0;
   update();
 }
 
-void MainWindow::on_horizontalScrollBar_9_valueChanged(int value) {
-  dot_g_ = (double)value / 100.0;
+void MainWindow::on_horizontalScrollBar_vertexes_G_valueChanged(int value) {
+  vertClrG = (double)value / 100.0;
   update();
 }
 
-void MainWindow::on_horizontalScrollBar_10_valueChanged(int value) {
-  dot_b_ = (double)value / 100.0;
+void MainWindow::on_horizontalScrollBar_vertexes_B_valueChanged(int value) {
+  vertClrB = (double)value / 100.0;
   update();
 }

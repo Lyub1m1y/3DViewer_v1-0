@@ -59,12 +59,11 @@ class MainWindow : public QOpenGLWidget {
   QTimer *timer;
   QImage image;
 
-  double fon_r_, fon_g_, fon_b_;
-  double line_r_, line_g_, line_b_;
-  double dot_r_, dot_g_, dot_b_;
+  double bgrClrR, bgrClrG, bgrClrB;
+  double edgClrR, edgClrG, edgClrB;
+  double vertClrR, vertClrG, vertClrB;
 
-  int framcountE;
-  int i = 0;
+  int framCountE;
 
  private slots:
   void on_pushButton_mv_x_plus_clicked();
@@ -102,9 +101,9 @@ class MainWindow : public QOpenGLWidget {
   void on_horizontalScrollBar_edges_B_valueChanged(int value);
 
   // vertexes color
-  void on_horizontalScrollBar_8_valueChanged(int value);
-  void on_horizontalScrollBar_9_valueChanged(int value);
-  void on_horizontalScrollBar_10_valueChanged(int value);
+  void on_horizontalScrollBar_vertexes_R_valueChanged(int value);
+  void on_horizontalScrollBar_vertexes_G_valueChanged(int value);
+  void on_horizontalScrollBar_vertexes_B_valueChanged(int value);
 
   void gif_creator();
   void gif_timer();
@@ -124,7 +123,7 @@ class MainWindow : public QOpenGLWidget {
 
   int numberFps;
   QTimer *gifTmr;
-  QGifImage *gif_img_;
+  QGifImage *gifImg;
   QString gifFileName;
   QSettings *settings;
 };

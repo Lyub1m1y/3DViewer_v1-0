@@ -552,7 +552,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QScrollBar" name="horizontalScrollBar_8">
+        <widget class="QScrollBar" name="horizontalScrollBar_vertexes_R">
          <property name="minimumSize">
           <size>
            <width>196</width>
@@ -582,7 +582,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QScrollBar" name="horizontalScrollBar_10">
+        <widget class="QScrollBar" name="horizontalScrollBar_vertexes_B">
          <property name="minimumSize">
           <size>
            <width>196</width>
@@ -618,7 +618,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QScrollBar" name="horizontalScrollBar_9">
+        <widget class="QScrollBar" name="horizontalScrollBar_vertexes_G">
          <property name="minimumSize">
           <size>
            <width>196</width>
