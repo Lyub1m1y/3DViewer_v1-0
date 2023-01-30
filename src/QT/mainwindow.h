@@ -12,6 +12,8 @@
 #include <GL/glut.h>
 #endif
 
+#include <qgroupbox.h>
+
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QMouseEvent>
@@ -22,7 +24,6 @@
 #include <QWidget>
 
 #include "qgifimage.h"
-#include <qgroupbox.h>
 extern "C" {
 #include "../Model/viewer.h"
 }
@@ -59,6 +60,8 @@ class MainWindow : public QOpenGLWidget {
   QImage image;
 
   double fon_r_, fon_g_, fon_b_;
+  double line_r_, line_g_, line_b_;
+  double dot_r_, dot_g_, dot_b_;
 
   int framcountE;
   int i = 0;
@@ -79,7 +82,6 @@ class MainWindow : public QOpenGLWidget {
   void on_projection_type_activated();
   void on_vertexes_type_activated();
   void on_spinBox_vertexes_size_valueChanged();
-  void on_comboBox_vertexes_color_activated();
   void on_spinBox_edges_size_valueChanged();
   void on_comboBox_edges_type_activated();
   void on_comboBox_edges_color_activated();
@@ -89,9 +91,20 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_screenshot_clicked();
   void on_pushButton_gif_clicked();
 
+  // bgr color
   void on_horizontalScrollBar_bgr_R_valueChanged(int value);
   void on_horizontalScrollBar_bgr_G_valueChanged(int value);
   void on_horizontalScrollBar_bgr_B_valueChanged(int value);
+
+  // edges color
+  void on_horizontalScrollBar_edges_R_valueChanged(int value);
+  void on_horizontalScrollBar_edges_G_valueChanged(int value);
+  void on_horizontalScrollBar_edges_B_valueChanged(int value);
+
+  // vertexes color
+  void on_horizontalScrollBar_8_valueChanged(int value);
+  void on_horizontalScrollBar_9_valueChanged(int value);
+  void on_horizontalScrollBar_10_valueChanged(int value);
 
   void gif_creator();
   void gif_timer();
@@ -106,7 +119,7 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_sc_y_minus_clicked();
   void on_pushButton_sc_z_minus_clicked();
 
-private:
+ private:
   Ui::MainWindow *ui;
 
   int numberFps;

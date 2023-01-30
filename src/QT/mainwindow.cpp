@@ -13,6 +13,9 @@ MainWindow::MainWindow(QWidget* parent)
   //  connect(timer, &QTimer::timeout, this, &MainWindow::gif_creator);
   gifTmr = new QTimer();
   connect(gifTmr, SIGNAL(timeout()), this, SLOT(gif_creator()));
+  fon_r_ = 0.0, fon_g_ = 0.0, fon_b_ = 0.0;
+  line_r_ = 0.0, line_g_ = 0.0, line_b_ = 0.0;
+  dot_r_ = 0.0, dot_g_ = 0.0, dot_b_ = 0.0;
 }
 
 MainWindow::~MainWindow() {
@@ -55,14 +58,10 @@ void MainWindow::paintGL() {
 
 void MainWindow::saveSettings() {
   settings->setValue("projection_type", ui->projection_type->currentIndex());
-  settings->setValue("background_color",
-                     ui->comboBox_background_color->currentIndex());
-  settings->setValue("edges_color", ui->comboBox_edges_color->currentIndex());
   settings->setValue("edges_type", ui->comboBox_edges_type->currentIndex());
-  settings->setValue("edges_size", ui->spinBox_edges_size->value());
-  settings->setValue("vertexes_color",
-                     ui->comboBox_vertexes_color->currentIndex());
   settings->setValue("vertexes_type", ui->vertexes_type->currentIndex());
+
+  settings->setValue("edges_size", ui->spinBox_edges_size->value());
   settings->setValue("vertexes_size", ui->spinBox_vertexes_size->value());
 
   settings->setValue("horizontalScrollBar_bgr_R",
@@ -71,39 +70,33 @@ void MainWindow::saveSettings() {
                      ui->horizontalScrollBar_bgr_G->value());
   settings->setValue("horizontalScrollBar_bgr_B",
                      ui->horizontalScrollBar_bgr_B->value());
-  // settings.setValue("horizontalScrollBar_4",
-  //                   ui->horizontalScrollBar_4->value());
-  // settings.setValue("horizontalScrollBar_5",
-  //                   ui->horizontalScrollBar_5->value());
-  // settings.setValue("horizontalScrollBar_6",
-  //                   ui->horizontalScrollBar_6->value());
-  // settings.setValue("horizontalScrollBar_7",
-  //                   ui->horizontalScrollBar_7->value());
-  // settings.setValue("horizontalScrollBar_8",
-  //                   ui->horizontalScrollBar_8->value());
-  // settings.setValue("horizontalScrollBar_9",
-  //                   ui->horizontalScrollBar_9->value());
-  // settings.setValue("horizontalScrollBar_10",
-  //                   ui->horizontalScrollBar_10->value());
-  // settings.setValue("horizontalScrollBar_11",
-  //                   ui->horizontalScrollBar_11->value());
+
+  settings->setValue("horizontalScrollBar_edges_R",
+                     ui->horizontalScrollBar_edges_R->value());
+  settings->setValue("horizontalScrollBar_edges_G",
+                     ui->horizontalScrollBar_edges_G->value());
+  settings->setValue("horizontalScrollBar_edges_B",
+                     ui->horizontalScrollBar_edges_B->value());
+
+  settings->setValue("horizontalScrollBar_8",
+                     ui->horizontalScrollBar_8->value());
+  settings->setValue("horizontalScrollBar_9",
+                     ui->horizontalScrollBar_9->value());
+  settings->setValue("horizontalScrollBar_10",
+                     ui->horizontalScrollBar_10->value());
 }
 
 void MainWindow::loadSettings() {
-  int pr_type = settings->value("projection_type", "0").toInt();
-  ui->projection_type->setCurrentIndex(pr_type);
-  int e_color = settings->value("edges_color", "0").toInt();
-  ui->comboBox_edges_color->setCurrentIndex(e_color);
-  int e_type = settings->value("edges_type", "0").toInt();
-  ui->comboBox_edges_type->setCurrentIndex(e_type);
-  int e_size = settings->value("edges_size", "1").toInt();
-  ui->spinBox_edges_size->setValue(e_size);
-  int v_color = settings->value("vertexes_color", "0").toInt();
-  ui->comboBox_vertexes_color->setCurrentIndex(v_color);
-  int v_type = settings->value("vertexes_type", "0").toInt();
-  ui->vertexes_type->setCurrentIndex(v_type);
-  int v_size = settings->value("vertexes_size", "10").toInt();
-  ui->spinBox_vertexes_size->setValue(v_size);
+  ui->projection_type->setCurrentIndex(
+      settings->value("projection_type", "0").toInt());
+  ui->comboBox_edges_type->setCurrentIndex(
+      settings->value("edges_type", "0").toInt());
+  ui->vertexes_type->setCurrentIndex(
+      settings->value("vertexes_type", "0").toInt());
+
+  ui->spinBox_edges_size->setValue(settings->value("edges_size", "1").toInt());
+  ui->spinBox_vertexes_size->setValue(
+      settings->value("vertexes_size", "10").toInt());
 
   // back color
   ui->horizontalScrollBar_bgr_R->setValue(
@@ -113,22 +106,19 @@ void MainWindow::loadSettings() {
   ui->horizontalScrollBar_bgr_B->setValue(
       settings->value("horizontalScrollBar_bgr_B").toInt());
 
-  // ui->horizontalScrollBar_4->setValue(
-  //     settings.value("horizontalScrollBar_4").toInt());
-  // ui->horizontalScrollBar_5->setValue(
-  //     settings.value("horizontalScrollBar_5").toInt());
-  // ui->horizontalScrollBar_6->setValue(
-  //     settings.value("horizontalScrollBar_6").toInt());
-  // ui->horizontalScrollBar_7->setValue(
-  //     settings.value("horizontalScrollBar_7").toInt());
-  // ui->horizontalScrollBar_8->setValue(
-  //     settings.value("horizontalScrollBar_8").toInt());
-  // ui->horizontalScrollBar_9->setValue(
-  //     settings.value("horizontalScrollBar_9").toInt());
-  // ui->horizontalScrollBar_10->setValue(
-  //     settings.value("horizontalScrollBar_10").toInt());
-  // ui->horizontalScrollBar_11->setValue(
-  //     settings.value("horizontalScrollBar_11").toInt());
+  ui->horizontalScrollBar_edges_R->setValue(
+      settings->value("horizontalScrollBar_edges_R").toInt());
+  ui->horizontalScrollBar_edges_G->setValue(
+      settings->value("horizontalScrollBar_edges_G").toInt());
+  ui->horizontalScrollBar_edges_B->setValue(
+      settings->value("horizontalScrollBar_edges_B").toInt());
+
+  ui->horizontalScrollBar_8->setValue(
+      settings->value("horizontalScrollBar_8").toInt());
+  ui->horizontalScrollBar_9->setValue(
+      settings->value("horizontalScrollBar_9").toInt());
+  ui->horizontalScrollBar_10->setValue(
+      settings->value("horizontalScrollBar_10").toInt());
 }
 void MainWindow::mousePressEvent(QMouseEvent* mo) { mPos = mo->pos(); }
 void MainWindow::mouseMoveEvent(QMouseEvent* mo) {
@@ -153,27 +143,13 @@ void MainWindow::draw() {
 
   glClearColor(fon_r_, fon_g_, fon_b_, 0.0f);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  // if (ui->comboBox_background_color->currentIndex() == 0) {
-  //   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-  // } else if (ui->comboBox_background_color->currentIndex() == 1) {
-  //   glClearColor(0.528f, 0.528f, 0.528f, 1.0f);
-  // } else if (ui->comboBox_background_color->currentIndex() == 2) {
-  //   glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-  // } else if (ui->comboBox_background_color->currentIndex() == 3) {
-  //   glClearColor(0.519f, 0.721f, 0.519f, 1.0f);
-  // }
 
+  // draw edges
   glLineWidth(0.1);
-  if (ui->comboBox_edges_color->currentIndex() == 0) {
-    glColor3d(0, 0, 1);
-  } else if (ui->comboBox_edges_color->currentIndex() == 1) {
-    glColor3d(1, 0, 0);
-  } else if (ui->comboBox_edges_color->currentIndex() == 2) {
-    glColor3d(0, 1, 0);
-  } else if (ui->comboBox_edges_color->currentIndex() == 3) {
-    glColor3d(1, 1, 1);
+  if ((!line_r_) && (!line_g_) && (!line_b_)) {
+    line_b_ = 0.9;
   }
-
+  glColor3f(line_r_, line_g_, line_b_);
   if (ui->comboBox_edges_type->currentIndex() == 0) {
     glDisable(GL_LINE_STIPPLE);
   } else if (ui->comboBox_edges_type->currentIndex() == 1) {
@@ -185,18 +161,15 @@ void MainWindow::draw() {
                  structData.arrEdges);
   glDisableClientState(GL_VERTEX_ARRAY);
 
+  // draw vertexes
+  glLineWidth(0.1);
+  if ((!dot_r_) && (!dot_g_) && (!dot_b_)) {
+    dot_r_ = 0.9;
+  }
   if (ui->vertexes_type->currentIndex() == 0) {
   } else {
     glEnableClientState(GL_VERTEX_ARRAY);
-    if (ui->comboBox_vertexes_color->currentIndex() == 0) {
-      glColor3d(1, 0, 0);
-    } else if (ui->comboBox_vertexes_color->currentIndex() == 1) {
-      glColor3d(0, 0, 1);
-    } else if (ui->comboBox_vertexes_color->currentIndex() == 2) {
-      glColor3d(0, 1, 0);
-    } else if (ui->comboBox_vertexes_color->currentIndex() == 3) {
-      glColor3d(1, 1, 1);
-    }
+    glColor3f(dot_r_, dot_g_, dot_b_);
 
     if (ui->vertexes_type->currentIndex() == 1) {
       glEnable(GL_POINT_SMOOTH);
@@ -212,6 +185,8 @@ void MainWindow::draw() {
 
     glDisableClientState(GL_VERTEX_ARRAY);
   }
+
+  update();
 }
 
 void MainWindow::on_pushButton_mv_x_plus_clicked() {
@@ -340,8 +315,6 @@ void MainWindow::on_vertexes_type_activated() { update(); }
 
 void MainWindow::on_spinBox_vertexes_size_valueChanged() { update(); }
 
-void MainWindow::on_comboBox_vertexes_color_activated() { update(); }
-
 void MainWindow::on_spinBox_edges_size_valueChanged() { update(); }
 
 void MainWindow::on_comboBox_edges_type_activated() { update(); }
@@ -418,6 +391,7 @@ void MainWindow::gif_creator() {
     ui->pushButton_gif->setText(QString::number(numberFps / 10));
 }
 
+// bgr color
 void MainWindow::on_horizontalScrollBar_bgr_R_valueChanged(int value) {
   fon_r_ = ((double)value) / 100.0;
   update();
@@ -430,5 +404,37 @@ void MainWindow::on_horizontalScrollBar_bgr_G_valueChanged(int value) {
 
 void MainWindow::on_horizontalScrollBar_bgr_B_valueChanged(int value) {
   fon_b_ = ((double)value) / 100.0;
+  update();
+}
+
+// edges color
+void MainWindow::on_horizontalScrollBar_edges_R_valueChanged(int value) {
+  line_r_ = ((double)value) / 100.0;
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_edges_G_valueChanged(int value) {
+  line_g_ = ((double)value) / 100.0;
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_edges_B_valueChanged(int value) {
+  line_b_ = ((double)value) / 100.0;
+  update();
+}
+
+// vertexes color
+void MainWindow::on_horizontalScrollBar_8_valueChanged(int value) {
+  dot_r_ = (double)value / 100.0;
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_9_valueChanged(int value) {
+  dot_g_ = (double)value / 100.0;
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_10_valueChanged(int value) {
+  dot_b_ = (double)value / 100.0;
   update();
 }
