@@ -1,6 +1,7 @@
 #include "viewer.h"
 
 int parser(data_t* data, char* fileName) {
+  setlocale(LC_ALL, "en_US.UTF-8");
   int status = OK;
   FILE* f;
   f = fopen(fileName, "r");
