@@ -23,11 +23,6 @@ MainWindow::~MainWindow() {
   if (structData.arrVertexes != NULL) {
     delete structData.arrVertexes;
   }
-
-  delete gifTmr;
-
-  delete gifImg;
-
   delete ui;
 }
 
@@ -377,8 +372,9 @@ void MainWindow::gif_creator() {
     ui->pushButton_gif->setEnabled(true);
   }
   ++numberFps;
-  if (!ui->pushButton_gif->isEnabled())
+  if (!ui->pushButton_gif->isEnabled()) {
     ui->pushButton_gif->setText(QString::number(numberFps / 10));
+  }
 }
 
 // bgr color
