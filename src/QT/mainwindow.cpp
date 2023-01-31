@@ -9,8 +9,7 @@ MainWindow::MainWindow(QWidget* parent)
   settings = new QSettings(this);
   loadSettings();
   framCountE = 0;
-  timer = new QTimer(this);
-  gifTmr = new QTimer();
+  gifTmr = new QTimer(0);
   connect(gifTmr, SIGNAL(timeout()), this, SLOT(gif_creator()));
   structData.arrEdges = NULL;
   structData.arrVertexes = NULL;
@@ -18,15 +17,24 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow() {
   gifTmr->~QTimer();
-  delete structData.arrEdges;
-  delete structData.arrVertexes;
+  if (structData.arrEdges != NULL) {
+    delete structData.arrEdges;
+  }
+  if (structData.arrVertexes != NULL) {
+    delete structData.arrVertexes;
+  }
+
+  delete gifTmr;
+
+  delete gifImg;
+
   delete ui;
 }
 
 void MainWindow::initializeGL() {
-    char file[] = "";
+  char file[] = "";
   // TODO deleate
-//  char file[] = "../objects/gun.obj";
+  //  char file[] = "../objects/gun.obj";
   parser(&structData, file);
   ui->label_info_v->setNum(structData.countV);
   ui->label_info_e->setNum(structData.countE);

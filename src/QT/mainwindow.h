@@ -56,7 +56,6 @@ class MainWindow : public QOpenGLWidget {
   void saveSettings();
   void loadSettings();
 
-  QTimer *timer;
   QImage image;
 
   double bgrClrR, bgrClrG, bgrClrB;
