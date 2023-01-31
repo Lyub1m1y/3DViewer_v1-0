@@ -24,9 +24,9 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::initializeGL() {
-  //  char file[] = "";
+    char file[] = "";
   // TODO deleate
-  char file[] = "/Users/katrinap/Desktop/3DViewer_v1-main/src/objects/gun.obj";
+//  char file[] = "../objects/gun.obj";
   parser(&structData, file);
   ui->label_info_v->setNum(structData.countV);
   ui->label_info_e->setNum(structData.countE);
@@ -304,10 +304,6 @@ void MainWindow::on_spinBox_vertexes_size_valueChanged() { update(); }
 void MainWindow::on_spinBox_edges_size_valueChanged() { update(); }
 
 void MainWindow::on_comboBox_edges_type_activated() { update(); }
-
-void MainWindow::on_comboBox_edges_color_activated() { update(); }
-
-void MainWindow::on_comboBox_background_color_activated() { update(); }
 
 void MainWindow::on_pushButton_select_name_clicked() {
   QString str;

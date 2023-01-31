@@ -41,7 +41,7 @@ class MainWindow : public QOpenGLWidget {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-  data_t structData;
+  data_t structData = {0,0,0,NULL,NULL};
 
   float xRot, yRot, zRot;
 
@@ -83,8 +83,6 @@ class MainWindow : public QOpenGLWidget {
   void on_spinBox_vertexes_size_valueChanged();
   void on_spinBox_edges_size_valueChanged();
   void on_comboBox_edges_type_activated();
-  void on_comboBox_edges_color_activated();
-  void on_comboBox_background_color_activated();
   void on_pushButton_select_name_clicked();
   void on_pushButton_save_settings_clicked();
   void on_pushButton_screenshot_clicked();
