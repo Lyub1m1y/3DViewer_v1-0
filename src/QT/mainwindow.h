@@ -81,7 +81,6 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_rt_z_plus_clicked();
   void on_pushButton_rt_z_minus_clicked();
   void on_projection_type_activated();
-  void on_vertexes_type_activated();
   void on_spinBox_vertexes_size_valueChanged();
   void on_spinBox_edges_size_valueChanged();
   void on_comboBox_edges_type_activated();

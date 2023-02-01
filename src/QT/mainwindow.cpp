@@ -115,16 +115,16 @@ void MainWindow::draw() {
 
   // draw vertexes
   glLineWidth(0.1);
-  if (ui->vertexes_type->currentIndex() == 0) {
+  if (ui->radioButton_norm->isChecked()) {
   } else {
     glEnableClientState(GL_VERTEX_ARRAY);
     glColor3f(vertClrR, vertClrG, vertClrB);
 
-    if (ui->vertexes_type->currentIndex() == 1) {
+    if (ui->radioButton_circles->isChecked()) {
       glEnable(GL_POINT_SMOOTH);
       glDrawArrays(GL_POINTS, 0, structData.countV);
       glDisable(GL_POINT_SMOOTH);
-    } else if (ui->vertexes_type->currentIndex() == 2) {
+    } else if (ui->radioButton_quads->isChecked()) {
       glDrawArrays(GL_POINTS, 0, structData.countV);
     }
 
@@ -281,7 +281,11 @@ void MainWindow::gif_creator() {
 void MainWindow::saveSettings() {
   settings->setValue("projection_type", ui->projection_type->currentIndex());
   settings->setValue("edges_type", ui->comboBox_edges_type->currentIndex());
-  settings->setValue("vertexes_type", ui->vertexes_type->currentIndex());
+
+  settings->setValue("radioButton_norm", ui->radioButton_norm->isChecked());
+  settings->setValue("radioButton_circles",
+                     ui->radioButton_circles->isChecked());
+  settings->setValue("radioButton_quads", ui->radioButton_quads->isChecked());
 
   settings->setValue("edges_size", ui->spinBox_edges_size->value());
   settings->setValue("vertexes_size", ui->spinBox_vertexes_size->value());
@@ -313,8 +317,13 @@ void MainWindow::loadSettings() {
       settings->value("projection_type", "0").toInt());
   ui->comboBox_edges_type->setCurrentIndex(
       settings->value("edges_type", "0").toInt());
-  ui->vertexes_type->setCurrentIndex(
-      settings->value("vertexes_type", "0").toInt());
+
+  ui->radioButton_norm->setChecked(
+      settings->value("radioButton_norm", true).toBool());
+  ui->radioButton_circles->setChecked(
+      settings->value("radioButton_circles", true).toBool());
+  ui->radioButton_quads->setChecked(
+      settings->value("radioButton_quads", true).toBool());
 
   ui->spinBox_edges_size->setValue(settings->value("edges_size", "1").toInt());
   ui->spinBox_vertexes_size->setValue(
@@ -422,8 +431,6 @@ void MainWindow::on_horizontalScrollBar_vertexes_B_valueChanged(int value) {
 }
 
 void MainWindow::on_projection_type_activated() { update(); }
-
-void MainWindow::on_vertexes_type_activated() { update(); }
 
 void MainWindow::on_spinBox_vertexes_size_valueChanged() { update(); }
 
