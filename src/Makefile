@@ -66,6 +66,8 @@ clean:
 	@rm -rf GcovReport
 	@rm -rf ../.DS_Store
 	@rm -rf .DS_Store
+	@rm -rf **/.qmake.stash
+	@rm -rf **/3DViewer_v1-0.pro.user
 
 dvi:
 	open ./Help/index.html

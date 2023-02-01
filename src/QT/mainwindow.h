@@ -41,11 +41,14 @@ class MainWindow : public QOpenGLWidget {
   MainWindow(QWidget *parent = nullptr);
   ~MainWindow();
 
-  data_t structData = {0,0,0,NULL,NULL};
+  data_t structData = {0, 0, 0, NULL, NULL};
+
+  QString file;
 
   float xRot, yRot, zRot;
 
   QPoint mPos;
+  void initFile(char *path);
   void draw();
   void mousePressEvent(QMouseEvent *) override;
   void mouseMoveEvent(QMouseEvent *) override;
@@ -114,6 +117,8 @@ class MainWindow : public QOpenGLWidget {
   void on_pushButton_sc_x_minus_clicked();
   void on_pushButton_sc_y_minus_clicked();
   void on_pushButton_sc_z_minus_clicked();
+
+  void on_pushButton_reset_clicked();
 
  private:
   Ui::MainWindow *ui;

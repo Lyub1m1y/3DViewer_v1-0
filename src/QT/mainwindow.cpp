@@ -26,16 +26,7 @@ MainWindow::~MainWindow() {
   delete ui;
 }
 
-void MainWindow::initializeGL() {
-  char file[] = "";
-  // TODO deleate
-  //  char file[] = "../objects/gun.obj";
-  parser(&structData, file);
-  ui->label_info_v->setNum(structData.countV);
-  ui->label_info_e->setNum(structData.countE);
-  ui->label_info_p->setNum(structData.countP);
-  glEnable(GL_DEPTH_TEST);
-}
+void MainWindow::initializeGL() { glEnable(GL_DEPTH_TEST); }
 
 void MainWindow::resizeGL(int w, int h) {
   glViewport(0, 0, w, h);
@@ -59,69 +50,38 @@ void MainWindow::paintGL() {
   draw();
 }
 
-void MainWindow::saveSettings() {
-  settings->setValue("projection_type", ui->projection_type->currentIndex());
-  settings->setValue("edges_type", ui->comboBox_edges_type->currentIndex());
-  settings->setValue("vertexes_type", ui->vertexes_type->currentIndex());
-
-  settings->setValue("edges_size", ui->spinBox_edges_size->value());
-  settings->setValue("vertexes_size", ui->spinBox_vertexes_size->value());
-
-  settings->setValue("horizontalScrollBar_bgr_R",
-                     ui->horizontalScrollBar_bgr_R->value());
-  settings->setValue("horizontalScrollBar_bgr_G",
-                     ui->horizontalScrollBar_bgr_G->value());
-  settings->setValue("horizontalScrollBar_bgr_B",
-                     ui->horizontalScrollBar_bgr_B->value());
-
-  settings->setValue("horizontalScrollBar_edges_R",
-                     ui->horizontalScrollBar_edges_R->value());
-  settings->setValue("horizontalScrollBar_edges_G",
-                     ui->horizontalScrollBar_edges_G->value());
-  settings->setValue("horizontalScrollBar_edges_B",
-                     ui->horizontalScrollBar_edges_B->value());
-
-  settings->setValue("horizontalScrollBar_vertexes_R",
-                     ui->horizontalScrollBar_vertexes_R->value());
-  settings->setValue("horizontalScrollBar_vertexes_G",
-                     ui->horizontalScrollBar_vertexes_G->value());
-  settings->setValue("horizontalScrollBar_vertexes_B",
-                     ui->horizontalScrollBar_vertexes_B->value());
+void MainWindow::on_pushButton_select_name_clicked() {
+  file = QFileDialog::getOpenFileName(this, "Select File",
+                                      "..\\3DViewer_v1-0\\objects\\");
+  QFileInfo fileinfo(file);
+  QString objName = fileinfo.fileName();
+  ui->label_object_name->setText(objName);
+  QByteArray ba = file.toLocal8Bit();
+  char* path = ba.data();
+  initFile(path);
+  update();
 }
 
-void MainWindow::loadSettings() {
-  ui->projection_type->setCurrentIndex(
-      settings->value("projection_type", "0").toInt());
-  ui->comboBox_edges_type->setCurrentIndex(
-      settings->value("edges_type", "0").toInt());
-  ui->vertexes_type->setCurrentIndex(
-      settings->value("vertexes_type", "0").toInt());
+void MainWindow::initFile(char* path) {
+  parser(&structData, path);
+  ui->label_info_v->setNum(structData.countV);
+  ui->label_info_e->setNum(structData.countE);
+  ui->label_info_p->setNum(structData.countP);
+  update();
+}
 
-  ui->spinBox_edges_size->setValue(settings->value("edges_size", "1").toInt());
-  ui->spinBox_vertexes_size->setValue(
-      settings->value("vertexes_size", "10").toInt());
-
-  // back color
-  ui->horizontalScrollBar_bgr_R->setValue(
-      settings->value("horizontalScrollBar_bgr_R").toInt());
-  ui->horizontalScrollBar_bgr_G->setValue(
-      settings->value("horizontalScrollBar_bgr_G").toInt());
-  ui->horizontalScrollBar_bgr_B->setValue(
-      settings->value("horizontalScrollBar_bgr_B").toInt());
-
-  ui->horizontalScrollBar_edges_R->setValue(
-      settings->value("horizontalScrollBar_edges_R").toInt());
-  ui->horizontalScrollBar_edges_G->setValue(
-      settings->value("horizontalScrollBar_edges_G").toInt());
-  ui->horizontalScrollBar_edges_B->setValue(
-      settings->value("horizontalScrollBar_edges_B").toInt());
-
-  ui->horizontalScrollBar_vertexes_R->setValue(
-      settings->value("horizontalScrollBar_vertexes_R").toInt());
-  ui->horizontalScrollBar_vertexes_G->setValue(
-      settings->value("horizontalScrollBar_vertexes_G").toInt());
-  ui->horizontalScrollBar_vertexes_B->setValue(
-      settings->value("horizontalScrollBar_vertexes_B").toInt());
+void MainWindow::on_pushButton_reset_clicked() {
+  structData.countV = 0;
+  structData.countE = 0;
+  structData.countP = 0;
+  if (structData.arrVertexes != NULL) free(structData.arrVertexes);
+  if (structData.arrEdges != NULL) free(structData.arrEdges);
+  structData.arrVertexes = NULL;
+  structData.arrEdges = NULL;
+  QByteArray ba = file.toLocal8Bit();
+  char* path = ba.data();
+  initFile(path);
+  update();
 }
 
 void MainWindow::mousePressEvent(QMouseEvent* mo) { mPos = mo->pos(); }
@@ -268,65 +228,6 @@ void MainWindow::on_pushButton_sc_z_minus_clicked() {
   update();
 }
 
-void MainWindow::on_pushButton_rt_x_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), X);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_x_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, X);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_y_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Y);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_y_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Y);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_z_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Z);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_z_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Z);
-  update();
-}
-
-void MainWindow::on_projection_type_activated() { update(); }
-
-void MainWindow::on_vertexes_type_activated() { update(); }
-
-void MainWindow::on_spinBox_vertexes_size_valueChanged() { update(); }
-
-void MainWindow::on_spinBox_edges_size_valueChanged() { update(); }
-
-void MainWindow::on_comboBox_edges_type_activated() { update(); }
-
-void MainWindow::on_pushButton_select_name_clicked() {
-  QString str;
-  str = QFileDialog::getOpenFileName(this, "Select File",
-                                     "..\\3DViewer_v1-0\\objects\\");
-  QFileInfo fileinfo(str);
-  QString F = fileinfo.fileName();
-  ui->label_object_name->setText(F);
-  QByteArray ba = str.toLocal8Bit();
-  char* c_str = ba.data();
-  parser(&structData, c_str);
-  ui->label_info_v->setNum(structData.countV);
-  ui->label_info_e->setNum(structData.countE);
-  ui->label_info_p->setNum(structData.countP);
-
-  update();
-}
-
-void MainWindow::on_pushButton_save_settings_clicked() { saveSettings(); }
-
 void MainWindow::on_pushButton_screenshot_clicked() {
   QFileDialog file_dialog_img(this);
   QString f_name = file_dialog_img.getSaveFileName(
@@ -377,6 +278,101 @@ void MainWindow::gif_creator() {
   }
 }
 
+void MainWindow::saveSettings() {
+  settings->setValue("projection_type", ui->projection_type->currentIndex());
+  settings->setValue("edges_type", ui->comboBox_edges_type->currentIndex());
+  settings->setValue("vertexes_type", ui->vertexes_type->currentIndex());
+
+  settings->setValue("edges_size", ui->spinBox_edges_size->value());
+  settings->setValue("vertexes_size", ui->spinBox_vertexes_size->value());
+
+  settings->setValue("horizontalScrollBar_bgr_R",
+                     ui->horizontalScrollBar_bgr_R->value());
+  settings->setValue("horizontalScrollBar_bgr_G",
+                     ui->horizontalScrollBar_bgr_G->value());
+  settings->setValue("horizontalScrollBar_bgr_B",
+                     ui->horizontalScrollBar_bgr_B->value());
+
+  settings->setValue("horizontalScrollBar_edges_R",
+                     ui->horizontalScrollBar_edges_R->value());
+  settings->setValue("horizontalScrollBar_edges_G",
+                     ui->horizontalScrollBar_edges_G->value());
+  settings->setValue("horizontalScrollBar_edges_B",
+                     ui->horizontalScrollBar_edges_B->value());
+
+  settings->setValue("horizontalScrollBar_vertexes_R",
+                     ui->horizontalScrollBar_vertexes_R->value());
+  settings->setValue("horizontalScrollBar_vertexes_G",
+                     ui->horizontalScrollBar_vertexes_G->value());
+  settings->setValue("horizontalScrollBar_vertexes_B",
+                     ui->horizontalScrollBar_vertexes_B->value());
+}
+
+void MainWindow::loadSettings() {
+  ui->projection_type->setCurrentIndex(
+      settings->value("projection_type", "0").toInt());
+  ui->comboBox_edges_type->setCurrentIndex(
+      settings->value("edges_type", "0").toInt());
+  ui->vertexes_type->setCurrentIndex(
+      settings->value("vertexes_type", "0").toInt());
+
+  ui->spinBox_edges_size->setValue(settings->value("edges_size", "1").toInt());
+  ui->spinBox_vertexes_size->setValue(
+      settings->value("vertexes_size", "10").toInt());
+
+  // back color
+  ui->horizontalScrollBar_bgr_R->setValue(
+      settings->value("horizontalScrollBar_bgr_R").toInt());
+  ui->horizontalScrollBar_bgr_G->setValue(
+      settings->value("horizontalScrollBar_bgr_G").toInt());
+  ui->horizontalScrollBar_bgr_B->setValue(
+      settings->value("horizontalScrollBar_bgr_B").toInt());
+
+  ui->horizontalScrollBar_edges_R->setValue(
+      settings->value("horizontalScrollBar_edges_R").toInt());
+  ui->horizontalScrollBar_edges_G->setValue(
+      settings->value("horizontalScrollBar_edges_G").toInt());
+  ui->horizontalScrollBar_edges_B->setValue(
+      settings->value("horizontalScrollBar_edges_B").toInt());
+
+  ui->horizontalScrollBar_vertexes_R->setValue(
+      settings->value("horizontalScrollBar_vertexes_R").toInt());
+  ui->horizontalScrollBar_vertexes_G->setValue(
+      settings->value("horizontalScrollBar_vertexes_G").toInt());
+  ui->horizontalScrollBar_vertexes_B->setValue(
+      settings->value("horizontalScrollBar_vertexes_B").toInt());
+}
+
+void MainWindow::on_pushButton_rt_x_plus_clicked() {
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), X);
+  update();
+}
+
+void MainWindow::on_pushButton_rt_x_minus_clicked() {
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, X);
+  update();
+}
+
+void MainWindow::on_pushButton_rt_y_plus_clicked() {
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Y);
+  update();
+}
+
+void MainWindow::on_pushButton_rt_y_minus_clicked() {
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Y);
+  update();
+}
+
+void MainWindow::on_pushButton_rt_z_plus_clicked() {
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Z);
+  update();
+}
+
+void MainWindow::on_pushButton_rt_z_minus_clicked() {
+  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Z);
+  update();
+}
+
 // bgr color
 void MainWindow::on_horizontalScrollBar_bgr_R_valueChanged(int value) {
   bgrClrR = ((double)value) / 100.0;
@@ -424,3 +420,15 @@ void MainWindow::on_horizontalScrollBar_vertexes_B_valueChanged(int value) {
   vertClrB = (double)value / 100.0;
   update();
 }
+
+void MainWindow::on_projection_type_activated() { update(); }
+
+void MainWindow::on_vertexes_type_activated() { update(); }
+
+void MainWindow::on_spinBox_vertexes_size_valueChanged() { update(); }
+
+void MainWindow::on_spinBox_edges_size_valueChanged() { update(); }
+
+void MainWindow::on_comboBox_edges_type_activated() { update(); }
+
+void MainWindow::on_pushButton_save_settings_clicked() { saveSettings(); }
