@@ -70,7 +70,7 @@ clean:
 	@rm -rf **/3DViewer_v1-0.pro.user
 
 dvi:
-	open ./Help/index.html
+	open ./dvi.html
 
 dist: 
 	rm -rf ../Archive_3DViewer_v1-0/
