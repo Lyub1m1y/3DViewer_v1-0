@@ -32,7 +32,7 @@
    <enum>Qt::LeftToRight</enum>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
+   <string notr="true">QWidget#MainWindow {
 	background: #212121;
 }
 
@@ -54,21 +54,21 @@ QToolBox::tab:selected {
 QGroupBox {
 	background: #292929;
 	border: 2px solid #292929;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
-QGroupBox#groupBox_10,
-QGroupBox#groupBox_9,
-QGroupBox#groupBox_11, 
-QGroupBox#groupBox_2 {
+QGroupBox#groupBox_tool_menu,
+QGroupBox#groupBox_pr_type,
+QGroupBox#groupBox_trash, 
+QGroupBox#groupBox_capture {
 	background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #474747, stop:0.995098 #949494);
 	border: none;
 }
 
-QGroupBox#groupBox_4,
-QGroupBox#groupBox_5,
-QGroupBox#groupBox_7,
-QGroupBox#groupBox_8{
+QGroupBox#groupBox_scaling,
+QGroupBox#groupBox_object_info,
+QGroupBox#groupBox_settings,
+QGroupBox#groupBox_position{
 	border: 2px solid #302D3D;
     border-radius: 5px;
 	background: #302D3D;
@@ -108,240 +108,22 @@ QSpinBox::up-button:pressed {
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>15</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>15</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>15</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>15</number>
+    <number>0</number>
    </property>
    <property name="spacing">
     <number>5</number>
    </property>
-   <item row="0" column="0" colspan="3">
-    <widget class="QGroupBox" name="groupBox_6">
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>50</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>1600</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="styleSheet">
-      <string notr="true"/>
-     </property>
-     <property name="title">
-      <string/>
-     </property>
-     <layout class="QGridLayout" name="gridLayout_18">
-      <property name="leftMargin">
-       <number>20</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>20</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <property name="horizontalSpacing">
-       <number>300</number>
-      </property>
-      <property name="verticalSpacing">
-       <number>0</number>
-      </property>
-      <item row="0" column="1">
-       <widget class="QGroupBox" name="groupBox_9">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_19">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <property name="horizontalSpacing">
-          <number>20</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>0</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QPushButton" name="pushButton_screenshot">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>10</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
- 	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-    min-width: 80px;
-color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-}</string>
-           </property>
-           <property name="text">
-            <string>Capture picture</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="pushButton_gif">
-           <property name="minimumSize">
-            <size>
-             <width>80</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>25</height>
-            </size>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-    min-width: 80px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-}</string>
-           </property>
-           <property name="text">
-            <string>Record GIF</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QGroupBox" name="groupBox_10">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_20">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <property name="spacing">
-          <number>0</number>
-         </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_42">
-           <property name="text">
-            <string>Projection type</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QComboBox" name="projection_type">
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <item>
-            <property name="text">
-             <string>Central</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Parallel</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QGroupBox" name="groupBox_22">
-        <property name="styleSheet">
-         <string notr="true">background:blue;</string>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <widget class="QPushButton" name="pushButton_select_name">
-         <property name="geometry">
-          <rect>
-           <x>20</x>
-           <y>10</y>
-           <width>141</width>
-           <height>24</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Select File</string>
-         </property>
-        </widget>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="1" column="0">
-    <widget class="QGroupBox" name="groupBox_5">
+    <widget class="QGroupBox" name="groupBox_left">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -380,7 +162,7 @@ QPushButton:pressed {
        <number>0</number>
       </property>
       <item row="1" column="0" colspan="2">
-       <widget class="QGroupBox" name="groupBox_23">
+       <widget class="QGroupBox" name="groupBox_settings">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -471,13 +253,25 @@ QPushButton:pressed {
               </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QSpinBox" name="spinBox_3"/>
+              <widget class="QSpinBox" name="spinBox_bgr_B">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="0" column="1">
-              <widget class="QSpinBox" name="spinBox"/>
+              <widget class="QSpinBox" name="spinBox_bgr_R">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QSpinBox" name="spinBox_2"/>
+              <widget class="QSpinBox" name="spinBox_bgr_G">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="4" column="0">
               <widget class="QLabel" name="label_24">
@@ -548,10 +342,18 @@ QPushButton:pressed {
             </attribute>
             <layout class="QGridLayout" name="gridLayout_8">
              <item row="8" column="1">
-              <widget class="QSpinBox" name="spinBox_6"/>
+              <widget class="QSpinBox" name="spinBox_edges_B">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="4" column="1">
-              <widget class="QSpinBox" name="spinBox_4"/>
+              <widget class="QSpinBox" name="spinBox_edges_R">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="5" column="0" colspan="3">
               <widget class="QScrollBar" name="horizontalScrollBar_edges_R">
@@ -610,7 +412,11 @@ QPushButton:pressed {
               </widget>
              </item>
              <item row="6" column="1">
-              <widget class="QSpinBox" name="spinBox_5"/>
+              <widget class="QSpinBox" name="spinBox_edges_G">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="6" column="0">
               <widget class="QLabel" name="label_28">
@@ -672,7 +478,11 @@ QPushButton:pressed {
             </attribute>
             <layout class="QGridLayout" name="gridLayout_9">
              <item row="1" column="1">
-              <widget class="QSpinBox" name="spinBox_7"/>
+              <widget class="QSpinBox" name="spinBox_vertexes_R">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="4" column="0" colspan="3">
               <widget class="QScrollBar" name="horizontalScrollBar_vertexes_G">
@@ -708,7 +518,11 @@ QPushButton:pressed {
               </widget>
              </item>
              <item row="5" column="1">
-              <widget class="QSpinBox" name="spinBox_9"/>
+              <widget class="QSpinBox" name="spinBox_vertexes_B">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="1" column="0">
               <widget class="QLabel" name="label_31">
@@ -767,7 +581,11 @@ QPushButton:pressed {
               </widget>
              </item>
              <item row="3" column="1">
-              <widget class="QSpinBox" name="spinBox_8"/>
+              <widget class="QSpinBox" name="spinBox_vertexes_G">
+               <property name="maximum">
+                <number>255</number>
+               </property>
+              </widget>
              </item>
              <item row="0" column="0">
               <widget class="QRadioButton" name="radioButton_norm">
@@ -825,7 +643,7 @@ QPushButton:pressed {
        </widget>
       </item>
       <item row="3" column="0" colspan="2">
-       <widget class="QGroupBox" name="groupBox_24">
+       <widget class="QGroupBox" name="groupBox_position">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -1175,6 +993,12 @@ QPushButton:pressed {
    </item>
    <item row="1" column="1">
     <widget class="QGroupBox" name="groupBox">
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>25</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true">background: transparent;
 border: none;</string>
@@ -1233,7 +1057,7 @@ border: none;</string>
        </widget>
       </item>
       <item row="1" column="0" colspan="3">
-       <widget class="QGroupBox" name="groupBox_11">
+       <widget class="QGroupBox" name="groupBox_object_info">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -1380,7 +1204,7 @@ border: none;</string>
        </widget>
       </item>
       <item row="4" column="0" colspan="3">
-       <widget class="QGroupBox" name="groupBox_28">
+       <widget class="QGroupBox" name="groupBox_scaling">
         <property name="minimumSize">
          <size>
           <width>0</width>
@@ -1661,6 +1485,255 @@ QPushButton:pressed {
         <property name="text">
          <string>Object info</string>
         </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QGroupBox" name="groupBox_tool_menu">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>50</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>1600</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_18">
+      <property name="leftMargin">
+       <number>20</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>20</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <property name="horizontalSpacing">
+       <number>300</number>
+      </property>
+      <property name="verticalSpacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="1">
+       <widget class="QGroupBox" name="groupBox_capture">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_19">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="horizontalSpacing">
+          <number>20</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton_screenshot">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>10</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+ 	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
+                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
+    min-width: 80px;
+color: #C5D0E6;
+}
+
+QPushButton:pressed {
+    background-color:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
+                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
+}</string>
+           </property>
+           <property name="text">
+            <string>Capture picture</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QPushButton" name="pushButton_gif">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
+                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
+    min-width: 80px;
+	color: #C5D0E6;
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
+                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
+}</string>
+           </property>
+           <property name="text">
+            <string>Record GIF</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QGroupBox" name="groupBox_pr_type">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_20">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_42">
+           <property name="text">
+            <string>Projection type</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QComboBox" name="projection_type">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <item>
+            <property name="text">
+             <string>Central</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Parallel</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QGroupBox" name="groupBox_trash">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="0" column="0">
+          <widget class="QPushButton" name="pushButton_select_name">
+           <property name="minimumSize">
+            <size>
+             <width>80</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>25</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
+                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
+    min-width: 80px;
+	color: #C5D0E6;
+}
+
+QPushButton:pressed {
+    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
+                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
+} </string>
+           </property>
+           <property name="text">
+            <string>Select File</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>

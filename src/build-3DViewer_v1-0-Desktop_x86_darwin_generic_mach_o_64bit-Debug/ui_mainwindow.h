@@ -30,29 +30,17 @@ class Ui_MainWindow
 public:
     QLabel *hz;
     QGridLayout *gridLayout;
-    QGroupBox *groupBox_6;
-    QGridLayout *gridLayout_18;
-    QGroupBox *groupBox_9;
-    QGridLayout *gridLayout_19;
-    QPushButton *pushButton_screenshot;
-    QPushButton *pushButton_gif;
-    QGroupBox *groupBox_10;
-    QGridLayout *gridLayout_20;
-    QLabel *label_42;
-    QComboBox *projection_type;
-    QGroupBox *groupBox_22;
-    QPushButton *pushButton_select_name;
-    QGroupBox *groupBox_5;
+    QGroupBox *groupBox_left;
     QGridLayout *gridLayout_6;
-    QGroupBox *groupBox_23;
+    QGroupBox *groupBox_settings;
     QGridLayout *gridLayout_15;
     QToolBox *settings_box;
     QWidget *page;
     QGridLayout *gridLayout_7;
     QScrollBar *horizontalScrollBar_bgr_R;
-    QSpinBox *spinBox_3;
-    QSpinBox *spinBox;
-    QSpinBox *spinBox_2;
+    QSpinBox *spinBox_bgr_B;
+    QSpinBox *spinBox_bgr_R;
+    QSpinBox *spinBox_bgr_G;
     QLabel *label_24;
     QScrollBar *horizontalScrollBar_bgr_B;
     QLabel *label_25;
@@ -60,14 +48,14 @@ public:
     QScrollBar *horizontalScrollBar_bgr_G;
     QWidget *page_2;
     QGridLayout *gridLayout_8;
-    QSpinBox *spinBox_6;
-    QSpinBox *spinBox_4;
+    QSpinBox *spinBox_edges_B;
+    QSpinBox *spinBox_edges_R;
     QScrollBar *horizontalScrollBar_edges_R;
     QRadioButton *radioButton_stipple;
     QRadioButton *radioButton_line;
     QLabel *label_27;
     QScrollBar *horizontalScrollBar_edges_G;
-    QSpinBox *spinBox_5;
+    QSpinBox *spinBox_edges_G;
     QLabel *label_28;
     QScrollBar *horizontalScrollBar_edges_B;
     QLabel *label_29;
@@ -75,22 +63,22 @@ public:
     QSpinBox *spinBox_edges_size;
     QWidget *page_3;
     QGridLayout *gridLayout_9;
-    QSpinBox *spinBox_7;
+    QSpinBox *spinBox_vertexes_R;
     QScrollBar *horizontalScrollBar_vertexes_G;
     QLabel *label_30;
     QRadioButton *radioButton_circles;
-    QSpinBox *spinBox_9;
+    QSpinBox *spinBox_vertexes_B;
     QLabel *label_31;
     QScrollBar *horizontalScrollBar_vertexes_R;
     QScrollBar *horizontalScrollBar_vertexes_B;
     QLabel *label_32;
     QRadioButton *radioButton_quads;
-    QSpinBox *spinBox_8;
+    QSpinBox *spinBox_vertexes_G;
     QRadioButton *radioButton_norm;
     QLabel *label_49;
     QSpinBox *spinBox_vertexes_size;
     QLabel *label_22;
-    QGroupBox *groupBox_24;
+    QGroupBox *groupBox_position;
     QGridLayout *gridLayout_16;
     QToolBox *toolBox_2;
     QWidget *page_4;
@@ -116,7 +104,7 @@ public:
     QGroupBox *groupBox_7;
     QGridLayout *gridLayout_3;
     QLabel *label_20;
-    QGroupBox *groupBox_11;
+    QGroupBox *groupBox_object_info;
     QGridLayout *gridLayout_4;
     QLabel *label_14;
     QLabel *label_15;
@@ -129,7 +117,7 @@ public:
     QLabel *label_12;
     QLabel *label_13;
     QScrollBar *verticalScrollBar;
-    QGroupBox *groupBox_28;
+    QGroupBox *groupBox_scaling;
     QGridLayout *gridLayout_21;
     QPushButton *pushButton_sc_z_plus;
     QPushButton *pushButton_sc_y_minus;
@@ -144,6 +132,19 @@ public:
     QDoubleSpinBox *doubleSpinBox_sc_value;
     QLabel *label_47;
     QLabel *label_21;
+    QGroupBox *groupBox_tool_menu;
+    QGridLayout *gridLayout_18;
+    QGroupBox *groupBox_capture;
+    QGridLayout *gridLayout_19;
+    QPushButton *pushButton_screenshot;
+    QPushButton *pushButton_gif;
+    QGroupBox *groupBox_pr_type;
+    QGridLayout *gridLayout_20;
+    QLabel *label_42;
+    QComboBox *projection_type;
+    QGroupBox *groupBox_trash;
+    QGridLayout *gridLayout_2;
+    QPushButton *pushButton_select_name;
 
     void setupUi(QWidget *MainWindow)
     {
@@ -154,7 +155,7 @@ public:
         MainWindow->setMinimumSize(QSize(1600, 1000));
         MainWindow->setMaximumSize(QSize(1600, 1000));
         MainWindow->setLayoutDirection(Qt::LeftToRight);
-        MainWindow->setStyleSheet(QString::fromUtf8("QWidget {\n"
+        MainWindow->setStyleSheet(QString::fromUtf8("QWidget#MainWindow {\n"
 "	background: #212121;\n"
 "}\n"
 "\n"
@@ -176,22 +177,22 @@ public:
 "QGroupBox {\n"
 "	background: #292929;\n"
 "	border: 2px solid #292929;\n"
-"    border-radius: 10px;\n"
+"    border-radius: 15px;\n"
 "}\n"
 "\n"
-"QGroupBox#groupBox_10,\n"
-"QGroupBox#groupBox_9,\n"
-"QGroupBox#groupBox_11, \n"
-"QGroupBox#groupBox_2 {\n"
+"QGroupBox#groupBox_tool_menu,\n"
+"QGroupBox#groupBox_pr_type,\n"
+"QGroupBox#groupBox_trash, \n"
+"QGroupBox#groupBox_capture {\n"
 "	background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #474747, stop:0.995098 #949494);\n"
 "	border: none;\n"
 "}\n"
 "\n"
-"QGroupBox#groupBox_4,\n"
-"QGrou"
-                        "pBox#groupBox_5,\n"
-"QGroupBox#groupBox_7,\n"
-"QGroupBox#groupBox_8{\n"
+""
+                        "QGroupBox#groupBox_scaling,\n"
+"QGroupBox#groupBox_object_info,\n"
+"QGroupBox#groupBox_settings,\n"
+"QGroupBox#groupBox_position{\n"
 "	border: 2px solid #302D3D;\n"
 "    border-radius: 5px;\n"
 "	background: #302D3D;\n"
@@ -221,9 +222,9 @@ public:
 "                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);\n"
 "}\n"
 "QDoubleSpinBox::up-button:pressed,\n"
-"QSpinBox::up-button:pressed {\n"
-"    background-color: qlineargradient(x1: 0, y1: 0"
-                        ", x2: 0, y2: 1,\n"
+"QSpinBox::up-button:pre"
+                        "ssed {\n"
+"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
 "                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,\n"
 "                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);\n"
 "}\n"
@@ -235,127 +236,27 @@ public:
         gridLayout = new QGridLayout(MainWindow);
         gridLayout->setSpacing(5);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout->setContentsMargins(15, 15, 15, 15);
-        groupBox_6 = new QGroupBox(MainWindow);
-        groupBox_6->setObjectName(QString::fromUtf8("groupBox_6"));
-        groupBox_6->setMinimumSize(QSize(0, 50));
-        groupBox_6->setMaximumSize(QSize(1600, 16777215));
-        groupBox_6->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_18 = new QGridLayout(groupBox_6);
-        gridLayout_18->setObjectName(QString::fromUtf8("gridLayout_18"));
-        gridLayout_18->setHorizontalSpacing(300);
-        gridLayout_18->setVerticalSpacing(0);
-        gridLayout_18->setContentsMargins(20, 0, 20, 0);
-        groupBox_9 = new QGroupBox(groupBox_6);
-        groupBox_9->setObjectName(QString::fromUtf8("groupBox_9"));
-        groupBox_9->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_19 = new QGridLayout(groupBox_9);
-        gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
-        gridLayout_19->setHorizontalSpacing(20);
-        gridLayout_19->setVerticalSpacing(0);
-        gridLayout_19->setContentsMargins(0, 0, 0, 0);
-        pushButton_screenshot = new QPushButton(groupBox_9);
-        pushButton_screenshot->setObjectName(QString::fromUtf8("pushButton_screenshot"));
-        pushButton_screenshot->setMinimumSize(QSize(80, 10));
-        pushButton_screenshot->setMaximumSize(QSize(16777215, 25));
-        pushButton_screenshot->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"    border: 2px;\n"
-"    border-radius: 6px;\n"
-" 	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,\n"
-"                                stop: 0.5 #7000A8, stop: 1.0 #47006B);\n"
-"    min-width: 80px;\n"
-"color: #C5D0E6;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,\n"
-"                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);\n"
-"}"));
-
-        gridLayout_19->addWidget(pushButton_screenshot, 0, 0, 1, 1);
-
-        pushButton_gif = new QPushButton(groupBox_9);
-        pushButton_gif->setObjectName(QString::fromUtf8("pushButton_gif"));
-        pushButton_gif->setMinimumSize(QSize(80, 25));
-        pushButton_gif->setMaximumSize(QSize(16777215, 25));
-        pushButton_gif->setStyleSheet(QString::fromUtf8("QPushButton {\n"
-"    border: 2px;\n"
-"    border-radius: 6px;\n"
-"	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,\n"
-"                                stop: 0.5 #7000A8, stop: 1.0 #47006B);\n"
-"    min-width: 80px;\n"
-"	color: #C5D0E6;\n"
-"}\n"
-"\n"
-"QPushButton:pressed {\n"
-"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
-"                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,\n"
-"                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);\n"
-"}"));
-
-        gridLayout_19->addWidget(pushButton_gif, 0, 1, 1, 1);
-
-
-        gridLayout_18->addWidget(groupBox_9, 0, 1, 1, 1);
-
-        groupBox_10 = new QGroupBox(groupBox_6);
-        groupBox_10->setObjectName(QString::fromUtf8("groupBox_10"));
-        groupBox_10->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_20 = new QGridLayout(groupBox_10);
-        gridLayout_20->setSpacing(0);
-        gridLayout_20->setObjectName(QString::fromUtf8("gridLayout_20"));
-        gridLayout_20->setContentsMargins(0, 0, 0, 0);
-        label_42 = new QLabel(groupBox_10);
-        label_42->setObjectName(QString::fromUtf8("label_42"));
-
-        gridLayout_20->addWidget(label_42, 0, 0, 1, 1);
-
-        projection_type = new QComboBox(groupBox_10);
-        projection_type->addItem(QString());
-        projection_type->addItem(QString());
-        projection_type->setObjectName(QString::fromUtf8("projection_type"));
-        projection_type->setStyleSheet(QString::fromUtf8(""));
-
-        gridLayout_20->addWidget(projection_type, 0, 1, 1, 1);
-
-
-        gridLayout_18->addWidget(groupBox_10, 0, 0, 1, 1);
-
-        groupBox_22 = new QGroupBox(groupBox_6);
-        groupBox_22->setObjectName(QString::fromUtf8("groupBox_22"));
-        groupBox_22->setStyleSheet(QString::fromUtf8("background:blue;"));
-        pushButton_select_name = new QPushButton(groupBox_22);
-        pushButton_select_name->setObjectName(QString::fromUtf8("pushButton_select_name"));
-        pushButton_select_name->setGeometry(QRect(20, 10, 141, 24));
-
-        gridLayout_18->addWidget(groupBox_22, 0, 2, 1, 1);
-
-
-        gridLayout->addWidget(groupBox_6, 0, 0, 1, 3);
-
-        groupBox_5 = new QGroupBox(MainWindow);
-        groupBox_5->setObjectName(QString::fromUtf8("groupBox_5"));
-        groupBox_5->setMinimumSize(QSize(0, 0));
-        groupBox_5->setMaximumSize(QSize(300, 950));
-        groupBox_5->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_6 = new QGridLayout(groupBox_5);
+        gridLayout->setContentsMargins(0, 0, 0, 0);
+        groupBox_left = new QGroupBox(MainWindow);
+        groupBox_left->setObjectName(QString::fromUtf8("groupBox_left"));
+        groupBox_left->setMinimumSize(QSize(0, 0));
+        groupBox_left->setMaximumSize(QSize(300, 950));
+        groupBox_left->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_6 = new QGridLayout(groupBox_left);
         gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
         gridLayout_6->setHorizontalSpacing(10);
         gridLayout_6->setVerticalSpacing(0);
         gridLayout_6->setContentsMargins(5, 5, 5, 5);
-        groupBox_23 = new QGroupBox(groupBox_5);
-        groupBox_23->setObjectName(QString::fromUtf8("groupBox_23"));
-        groupBox_23->setMinimumSize(QSize(0, 400));
-        groupBox_23->setMaximumSize(QSize(16777215, 400));
-        groupBox_23->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_15 = new QGridLayout(groupBox_23);
+        groupBox_settings = new QGroupBox(groupBox_left);
+        groupBox_settings->setObjectName(QString::fromUtf8("groupBox_settings"));
+        groupBox_settings->setMinimumSize(QSize(0, 400));
+        groupBox_settings->setMaximumSize(QSize(16777215, 400));
+        groupBox_settings->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_15 = new QGridLayout(groupBox_settings);
         gridLayout_15->setSpacing(0);
         gridLayout_15->setObjectName(QString::fromUtf8("gridLayout_15"));
         gridLayout_15->setContentsMargins(0, 0, 0, 0);
-        settings_box = new QToolBox(groupBox_23);
+        settings_box = new QToolBox(groupBox_settings);
         settings_box->setObjectName(QString::fromUtf8("settings_box"));
         settings_box->setMinimumSize(QSize(0, 390));
         settings_box->setMaximumSize(QSize(370, 390));
@@ -376,20 +277,23 @@ public:
 
         gridLayout_7->addWidget(horizontalScrollBar_bgr_R, 1, 0, 1, 3);
 
-        spinBox_3 = new QSpinBox(page);
-        spinBox_3->setObjectName(QString::fromUtf8("spinBox_3"));
+        spinBox_bgr_B = new QSpinBox(page);
+        spinBox_bgr_B->setObjectName(QString::fromUtf8("spinBox_bgr_B"));
+        spinBox_bgr_B->setMaximum(255);
 
-        gridLayout_7->addWidget(spinBox_3, 4, 1, 1, 1);
+        gridLayout_7->addWidget(spinBox_bgr_B, 4, 1, 1, 1);
 
-        spinBox = new QSpinBox(page);
-        spinBox->setObjectName(QString::fromUtf8("spinBox"));
+        spinBox_bgr_R = new QSpinBox(page);
+        spinBox_bgr_R->setObjectName(QString::fromUtf8("spinBox_bgr_R"));
+        spinBox_bgr_R->setMaximum(255);
 
-        gridLayout_7->addWidget(spinBox, 0, 1, 1, 1);
+        gridLayout_7->addWidget(spinBox_bgr_R, 0, 1, 1, 1);
 
-        spinBox_2 = new QSpinBox(page);
-        spinBox_2->setObjectName(QString::fromUtf8("spinBox_2"));
+        spinBox_bgr_G = new QSpinBox(page);
+        spinBox_bgr_G->setObjectName(QString::fromUtf8("spinBox_bgr_G"));
+        spinBox_bgr_G->setMaximum(255);
 
-        gridLayout_7->addWidget(spinBox_2, 2, 1, 1, 1);
+        gridLayout_7->addWidget(spinBox_bgr_G, 2, 1, 1, 1);
 
         label_24 = new QLabel(page);
         label_24->setObjectName(QString::fromUtf8("label_24"));
@@ -430,15 +334,17 @@ public:
         page_2->setGeometry(QRect(0, 0, 282, 288));
         gridLayout_8 = new QGridLayout(page_2);
         gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
-        spinBox_6 = new QSpinBox(page_2);
-        spinBox_6->setObjectName(QString::fromUtf8("spinBox_6"));
+        spinBox_edges_B = new QSpinBox(page_2);
+        spinBox_edges_B->setObjectName(QString::fromUtf8("spinBox_edges_B"));
+        spinBox_edges_B->setMaximum(255);
 
-        gridLayout_8->addWidget(spinBox_6, 8, 1, 1, 1);
+        gridLayout_8->addWidget(spinBox_edges_B, 8, 1, 1, 1);
 
-        spinBox_4 = new QSpinBox(page_2);
-        spinBox_4->setObjectName(QString::fromUtf8("spinBox_4"));
+        spinBox_edges_R = new QSpinBox(page_2);
+        spinBox_edges_R->setObjectName(QString::fromUtf8("spinBox_edges_R"));
+        spinBox_edges_R->setMaximum(255);
 
-        gridLayout_8->addWidget(spinBox_4, 4, 1, 1, 1);
+        gridLayout_8->addWidget(spinBox_edges_R, 4, 1, 1, 1);
 
         horizontalScrollBar_edges_R = new QScrollBar(page_2);
         horizontalScrollBar_edges_R->setObjectName(QString::fromUtf8("horizontalScrollBar_edges_R"));
@@ -474,10 +380,11 @@ public:
 
         gridLayout_8->addWidget(horizontalScrollBar_edges_G, 7, 0, 1, 3);
 
-        spinBox_5 = new QSpinBox(page_2);
-        spinBox_5->setObjectName(QString::fromUtf8("spinBox_5"));
+        spinBox_edges_G = new QSpinBox(page_2);
+        spinBox_edges_G->setObjectName(QString::fromUtf8("spinBox_edges_G"));
+        spinBox_edges_G->setMaximum(255);
 
-        gridLayout_8->addWidget(spinBox_5, 6, 1, 1, 1);
+        gridLayout_8->addWidget(spinBox_edges_G, 6, 1, 1, 1);
 
         label_28 = new QLabel(page_2);
         label_28->setObjectName(QString::fromUtf8("label_28"));
@@ -515,10 +422,11 @@ public:
         page_3->setGeometry(QRect(0, 0, 282, 288));
         gridLayout_9 = new QGridLayout(page_3);
         gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
-        spinBox_7 = new QSpinBox(page_3);
-        spinBox_7->setObjectName(QString::fromUtf8("spinBox_7"));
+        spinBox_vertexes_R = new QSpinBox(page_3);
+        spinBox_vertexes_R->setObjectName(QString::fromUtf8("spinBox_vertexes_R"));
+        spinBox_vertexes_R->setMaximum(255);
 
-        gridLayout_9->addWidget(spinBox_7, 1, 1, 1, 1);
+        gridLayout_9->addWidget(spinBox_vertexes_R, 1, 1, 1, 1);
 
         horizontalScrollBar_vertexes_G = new QScrollBar(page_3);
         horizontalScrollBar_vertexes_G->setObjectName(QString::fromUtf8("horizontalScrollBar_vertexes_G"));
@@ -540,10 +448,11 @@ public:
 
         gridLayout_9->addWidget(radioButton_circles, 0, 2, 1, 1);
 
-        spinBox_9 = new QSpinBox(page_3);
-        spinBox_9->setObjectName(QString::fromUtf8("spinBox_9"));
+        spinBox_vertexes_B = new QSpinBox(page_3);
+        spinBox_vertexes_B->setObjectName(QString::fromUtf8("spinBox_vertexes_B"));
+        spinBox_vertexes_B->setMaximum(255);
 
-        gridLayout_9->addWidget(spinBox_9, 5, 1, 1, 1);
+        gridLayout_9->addWidget(spinBox_vertexes_B, 5, 1, 1, 1);
 
         label_31 = new QLabel(page_3);
         label_31->setObjectName(QString::fromUtf8("label_31"));
@@ -579,10 +488,11 @@ public:
 
         gridLayout_9->addWidget(radioButton_quads, 0, 1, 1, 1);
 
-        spinBox_8 = new QSpinBox(page_3);
-        spinBox_8->setObjectName(QString::fromUtf8("spinBox_8"));
+        spinBox_vertexes_G = new QSpinBox(page_3);
+        spinBox_vertexes_G->setObjectName(QString::fromUtf8("spinBox_vertexes_G"));
+        spinBox_vertexes_G->setMaximum(255);
 
-        gridLayout_9->addWidget(spinBox_8, 3, 1, 1, 1);
+        gridLayout_9->addWidget(spinBox_vertexes_G, 3, 1, 1, 1);
 
         radioButton_norm = new QRadioButton(page_3);
         radioButton_norm->setObjectName(QString::fromUtf8("radioButton_norm"));
@@ -606,9 +516,9 @@ public:
         gridLayout_15->addWidget(settings_box, 0, 0, 1, 1);
 
 
-        gridLayout_6->addWidget(groupBox_23, 1, 0, 1, 2);
+        gridLayout_6->addWidget(groupBox_settings, 1, 0, 1, 2);
 
-        label_22 = new QLabel(groupBox_5);
+        label_22 = new QLabel(groupBox_left);
         label_22->setObjectName(QString::fromUtf8("label_22"));
         label_22->setMinimumSize(QSize(0, 40));
         label_22->setMaximumSize(QSize(16777215, 40));
@@ -618,16 +528,16 @@ public:
 
         gridLayout_6->addWidget(label_22, 2, 0, 1, 1);
 
-        groupBox_24 = new QGroupBox(groupBox_5);
-        groupBox_24->setObjectName(QString::fromUtf8("groupBox_24"));
-        groupBox_24->setMinimumSize(QSize(0, 320));
-        groupBox_24->setMaximumSize(QSize(16777215, 320));
-        groupBox_24->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_16 = new QGridLayout(groupBox_24);
+        groupBox_position = new QGroupBox(groupBox_left);
+        groupBox_position->setObjectName(QString::fromUtf8("groupBox_position"));
+        groupBox_position->setMinimumSize(QSize(0, 320));
+        groupBox_position->setMaximumSize(QSize(16777215, 320));
+        groupBox_position->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_16 = new QGridLayout(groupBox_position);
         gridLayout_16->setSpacing(0);
         gridLayout_16->setObjectName(QString::fromUtf8("gridLayout_16"));
         gridLayout_16->setContentsMargins(0, 0, 0, 0);
-        toolBox_2 = new QToolBox(groupBox_24);
+        toolBox_2 = new QToolBox(groupBox_position);
         toolBox_2->setObjectName(QString::fromUtf8("toolBox_2"));
         toolBox_2->setMinimumSize(QSize(0, 310));
         toolBox_2->setMaximumSize(QSize(16777215, 310));
@@ -738,9 +648,9 @@ public:
         gridLayout_16->addWidget(toolBox_2, 0, 0, 1, 1);
 
 
-        gridLayout_6->addWidget(groupBox_24, 3, 0, 1, 2);
+        gridLayout_6->addWidget(groupBox_position, 3, 0, 1, 2);
 
-        pushButton_save_settings = new QPushButton(groupBox_5);
+        pushButton_save_settings = new QPushButton(groupBox_left);
         pushButton_save_settings->setObjectName(QString::fromUtf8("pushButton_save_settings"));
         pushButton_save_settings->setMinimumSize(QSize(60, 25));
         pushButton_save_settings->setMaximumSize(QSize(16777215, 25));
@@ -762,7 +672,7 @@ public:
 
         gridLayout_6->addWidget(pushButton_save_settings, 0, 1, 1, 1);
 
-        pushButton_reset = new QPushButton(groupBox_5);
+        pushButton_reset = new QPushButton(groupBox_left);
         pushButton_reset->setObjectName(QString::fromUtf8("pushButton_reset"));
         pushButton_reset->setMinimumSize(QSize(60, 25));
         pushButton_reset->setMaximumSize(QSize(16777215, 25));
@@ -784,7 +694,7 @@ public:
 
         gridLayout_6->addWidget(pushButton_reset, 2, 1, 1, 1);
 
-        label_23 = new QLabel(groupBox_5);
+        label_23 = new QLabel(groupBox_left);
         label_23->setObjectName(QString::fromUtf8("label_23"));
         label_23->setMinimumSize(QSize(0, 40));
         label_23->setMaximumSize(QSize(16777215, 40));
@@ -794,10 +704,11 @@ public:
         gridLayout_6->addWidget(label_23, 0, 0, 1, 1);
 
 
-        gridLayout->addWidget(groupBox_5, 1, 0, 1, 1);
+        gridLayout->addWidget(groupBox_left, 1, 0, 1, 1);
 
         groupBox = new QGroupBox(MainWindow);
         groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setMaximumSize(QSize(16777215, 25));
         groupBox->setStyleSheet(QString::fromUtf8("background: transparent;\n"
 "border: none;"));
 
@@ -818,46 +729,46 @@ public:
 
         gridLayout_3->addWidget(label_20, 2, 0, 1, 3);
 
-        groupBox_11 = new QGroupBox(groupBox_7);
-        groupBox_11->setObjectName(QString::fromUtf8("groupBox_11"));
-        groupBox_11->setMinimumSize(QSize(0, 100));
-        groupBox_11->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_4 = new QGridLayout(groupBox_11);
+        groupBox_object_info = new QGroupBox(groupBox_7);
+        groupBox_object_info->setObjectName(QString::fromUtf8("groupBox_object_info"));
+        groupBox_object_info->setMinimumSize(QSize(0, 100));
+        groupBox_object_info->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_4 = new QGridLayout(groupBox_object_info);
         gridLayout_4->setSpacing(5);
         gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
         gridLayout_4->setContentsMargins(0, 0, 0, 0);
-        label_14 = new QLabel(groupBox_11);
+        label_14 = new QLabel(groupBox_object_info);
         label_14->setObjectName(QString::fromUtf8("label_14"));
 
         gridLayout_4->addWidget(label_14, 1, 0, 1, 2);
 
-        label_15 = new QLabel(groupBox_11);
+        label_15 = new QLabel(groupBox_object_info);
         label_15->setObjectName(QString::fromUtf8("label_15"));
 
         gridLayout_4->addWidget(label_15, 2, 0, 1, 2);
 
-        label_19 = new QLabel(groupBox_11);
+        label_19 = new QLabel(groupBox_object_info);
         label_19->setObjectName(QString::fromUtf8("label_19"));
 
         gridLayout_4->addWidget(label_19, 0, 0, 1, 1);
 
-        label_info_e = new QLabel(groupBox_11);
+        label_info_e = new QLabel(groupBox_object_info);
         label_info_e->setObjectName(QString::fromUtf8("label_info_e"));
 
         gridLayout_4->addWidget(label_info_e, 1, 2, 1, 1);
 
-        label_info_v = new QLabel(groupBox_11);
+        label_info_v = new QLabel(groupBox_object_info);
         label_info_v->setObjectName(QString::fromUtf8("label_info_v"));
 
         gridLayout_4->addWidget(label_info_v, 0, 2, 1, 1);
 
-        label_info_p = new QLabel(groupBox_11);
+        label_info_p = new QLabel(groupBox_object_info);
         label_info_p->setObjectName(QString::fromUtf8("label_info_p"));
 
         gridLayout_4->addWidget(label_info_p, 2, 2, 1, 1);
 
 
-        gridLayout_3->addWidget(groupBox_11, 1, 0, 1, 3);
+        gridLayout_3->addWidget(groupBox_object_info, 1, 0, 1, 3);
 
         groupBox_8 = new QGroupBox(groupBox_7);
         groupBox_8->setObjectName(QString::fromUtf8("groupBox_8"));
@@ -891,17 +802,17 @@ public:
 
         gridLayout_3->addWidget(groupBox_8, 3, 1, 1, 1);
 
-        groupBox_28 = new QGroupBox(groupBox_7);
-        groupBox_28->setObjectName(QString::fromUtf8("groupBox_28"));
-        groupBox_28->setMinimumSize(QSize(0, 250));
-        groupBox_28->setMaximumSize(QSize(16777215, 400));
-        groupBox_28->setStyleSheet(QString::fromUtf8(""));
-        gridLayout_21 = new QGridLayout(groupBox_28);
+        groupBox_scaling = new QGroupBox(groupBox_7);
+        groupBox_scaling->setObjectName(QString::fromUtf8("groupBox_scaling"));
+        groupBox_scaling->setMinimumSize(QSize(0, 250));
+        groupBox_scaling->setMaximumSize(QSize(16777215, 400));
+        groupBox_scaling->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_21 = new QGridLayout(groupBox_scaling);
         gridLayout_21->setObjectName(QString::fromUtf8("gridLayout_21"));
         gridLayout_21->setHorizontalSpacing(10);
         gridLayout_21->setVerticalSpacing(0);
         gridLayout_21->setContentsMargins(12, 0, 12, 12);
-        pushButton_sc_z_plus = new QPushButton(groupBox_28);
+        pushButton_sc_z_plus = new QPushButton(groupBox_scaling);
         pushButton_sc_z_plus->setObjectName(QString::fromUtf8("pushButton_sc_z_plus"));
         pushButton_sc_z_plus->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    border: 2px;\n"
@@ -921,7 +832,7 @@ public:
 
         gridLayout_21->addWidget(pushButton_sc_z_plus, 7, 1, 1, 1);
 
-        pushButton_sc_y_minus = new QPushButton(groupBox_28);
+        pushButton_sc_y_minus = new QPushButton(groupBox_scaling);
         pushButton_sc_y_minus->setObjectName(QString::fromUtf8("pushButton_sc_y_minus"));
         pushButton_sc_y_minus->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    border: 2px;\n"
@@ -941,17 +852,17 @@ public:
 
         gridLayout_21->addWidget(pushButton_sc_y_minus, 5, 0, 1, 1);
 
-        label_44 = new QLabel(groupBox_28);
+        label_44 = new QLabel(groupBox_scaling);
         label_44->setObjectName(QString::fromUtf8("label_44"));
 
         gridLayout_21->addWidget(label_44, 4, 0, 1, 2);
 
-        label_43 = new QLabel(groupBox_28);
+        label_43 = new QLabel(groupBox_scaling);
         label_43->setObjectName(QString::fromUtf8("label_43"));
 
         gridLayout_21->addWidget(label_43, 6, 0, 1, 2);
 
-        pushButton_sc_y_plus = new QPushButton(groupBox_28);
+        pushButton_sc_y_plus = new QPushButton(groupBox_scaling);
         pushButton_sc_y_plus->setObjectName(QString::fromUtf8("pushButton_sc_y_plus"));
         pushButton_sc_y_plus->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    border: 2px;\n"
@@ -971,7 +882,7 @@ public:
 
         gridLayout_21->addWidget(pushButton_sc_y_plus, 5, 1, 1, 1);
 
-        pushButton_sc_x_minus = new QPushButton(groupBox_28);
+        pushButton_sc_x_minus = new QPushButton(groupBox_scaling);
         pushButton_sc_x_minus->setObjectName(QString::fromUtf8("pushButton_sc_x_minus"));
         pushButton_sc_x_minus->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    border: 2px;\n"
@@ -991,7 +902,7 @@ public:
 
         gridLayout_21->addWidget(pushButton_sc_x_minus, 3, 0, 1, 1);
 
-        label_46 = new QLabel(groupBox_28);
+        label_46 = new QLabel(groupBox_scaling);
         label_46->setObjectName(QString::fromUtf8("label_46"));
         label_46->setMinimumSize(QSize(0, 20));
         label_46->setMaximumSize(QSize(16777215, 14245));
@@ -1000,7 +911,7 @@ public:
 
         gridLayout_21->addWidget(label_46, 0, 0, 1, 2);
 
-        pushButton_sc_x_plus = new QPushButton(groupBox_28);
+        pushButton_sc_x_plus = new QPushButton(groupBox_scaling);
         pushButton_sc_x_plus->setObjectName(QString::fromUtf8("pushButton_sc_x_plus"));
         pushButton_sc_x_plus->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    border: 2px;\n"
@@ -1020,7 +931,7 @@ public:
 
         gridLayout_21->addWidget(pushButton_sc_x_plus, 3, 1, 1, 1);
 
-        pushButton_sc_z_minus = new QPushButton(groupBox_28);
+        pushButton_sc_z_minus = new QPushButton(groupBox_scaling);
         pushButton_sc_z_minus->setObjectName(QString::fromUtf8("pushButton_sc_z_minus"));
         pushButton_sc_z_minus->setStyleSheet(QString::fromUtf8("QPushButton {\n"
 "    border: 2px;\n"
@@ -1040,12 +951,12 @@ public:
 
         gridLayout_21->addWidget(pushButton_sc_z_minus, 7, 0, 1, 1);
 
-        label_45 = new QLabel(groupBox_28);
+        label_45 = new QLabel(groupBox_scaling);
         label_45->setObjectName(QString::fromUtf8("label_45"));
 
         gridLayout_21->addWidget(label_45, 2, 0, 1, 2);
 
-        doubleSpinBox_sc_value = new QDoubleSpinBox(groupBox_28);
+        doubleSpinBox_sc_value = new QDoubleSpinBox(groupBox_scaling);
         doubleSpinBox_sc_value->setObjectName(QString::fromUtf8("doubleSpinBox_sc_value"));
         doubleSpinBox_sc_value->setMinimumSize(QSize(0, 0));
         doubleSpinBox_sc_value->setMinimum(0.100000000000000);
@@ -1054,13 +965,13 @@ public:
 
         gridLayout_21->addWidget(doubleSpinBox_sc_value, 1, 1, 1, 1);
 
-        label_47 = new QLabel(groupBox_28);
+        label_47 = new QLabel(groupBox_scaling);
         label_47->setObjectName(QString::fromUtf8("label_47"));
 
         gridLayout_21->addWidget(label_47, 1, 0, 1, 1);
 
 
-        gridLayout_3->addWidget(groupBox_28, 4, 0, 1, 3);
+        gridLayout_3->addWidget(groupBox_scaling, 4, 0, 1, 3);
 
         label_21 = new QLabel(groupBox_7);
         label_21->setObjectName(QString::fromUtf8("label_21"));
@@ -1072,6 +983,128 @@ public:
 
 
         gridLayout->addWidget(groupBox_7, 1, 2, 1, 1);
+
+        groupBox_tool_menu = new QGroupBox(MainWindow);
+        groupBox_tool_menu->setObjectName(QString::fromUtf8("groupBox_tool_menu"));
+        groupBox_tool_menu->setMinimumSize(QSize(0, 50));
+        groupBox_tool_menu->setMaximumSize(QSize(1600, 16777215));
+        groupBox_tool_menu->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_18 = new QGridLayout(groupBox_tool_menu);
+        gridLayout_18->setObjectName(QString::fromUtf8("gridLayout_18"));
+        gridLayout_18->setHorizontalSpacing(300);
+        gridLayout_18->setVerticalSpacing(0);
+        gridLayout_18->setContentsMargins(20, 0, 20, 0);
+        groupBox_capture = new QGroupBox(groupBox_tool_menu);
+        groupBox_capture->setObjectName(QString::fromUtf8("groupBox_capture"));
+        groupBox_capture->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_19 = new QGridLayout(groupBox_capture);
+        gridLayout_19->setObjectName(QString::fromUtf8("gridLayout_19"));
+        gridLayout_19->setHorizontalSpacing(20);
+        gridLayout_19->setVerticalSpacing(0);
+        gridLayout_19->setContentsMargins(0, 0, 0, 0);
+        pushButton_screenshot = new QPushButton(groupBox_capture);
+        pushButton_screenshot->setObjectName(QString::fromUtf8("pushButton_screenshot"));
+        pushButton_screenshot->setMinimumSize(QSize(80, 10));
+        pushButton_screenshot->setMaximumSize(QSize(16777215, 25));
+        pushButton_screenshot->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    border: 2px;\n"
+"    border-radius: 6px;\n"
+" 	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,\n"
+"                                stop: 0.5 #7000A8, stop: 1.0 #47006B);\n"
+"    min-width: 80px;\n"
+"color: #C5D0E6;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,\n"
+"                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);\n"
+"}"));
+
+        gridLayout_19->addWidget(pushButton_screenshot, 0, 0, 1, 1);
+
+        pushButton_gif = new QPushButton(groupBox_capture);
+        pushButton_gif->setObjectName(QString::fromUtf8("pushButton_gif"));
+        pushButton_gif->setMinimumSize(QSize(80, 25));
+        pushButton_gif->setMaximumSize(QSize(16777215, 25));
+        pushButton_gif->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    border: 2px;\n"
+"    border-radius: 6px;\n"
+"	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,\n"
+"                                stop: 0.5 #7000A8, stop: 1.0 #47006B);\n"
+"    min-width: 80px;\n"
+"	color: #C5D0E6;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,\n"
+"                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);\n"
+"}"));
+
+        gridLayout_19->addWidget(pushButton_gif, 0, 1, 1, 1);
+
+
+        gridLayout_18->addWidget(groupBox_capture, 0, 1, 1, 1);
+
+        groupBox_pr_type = new QGroupBox(groupBox_tool_menu);
+        groupBox_pr_type->setObjectName(QString::fromUtf8("groupBox_pr_type"));
+        groupBox_pr_type->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_20 = new QGridLayout(groupBox_pr_type);
+        gridLayout_20->setSpacing(0);
+        gridLayout_20->setObjectName(QString::fromUtf8("gridLayout_20"));
+        gridLayout_20->setContentsMargins(0, 0, 0, 0);
+        label_42 = new QLabel(groupBox_pr_type);
+        label_42->setObjectName(QString::fromUtf8("label_42"));
+
+        gridLayout_20->addWidget(label_42, 0, 0, 1, 1);
+
+        projection_type = new QComboBox(groupBox_pr_type);
+        projection_type->addItem(QString());
+        projection_type->addItem(QString());
+        projection_type->setObjectName(QString::fromUtf8("projection_type"));
+        projection_type->setStyleSheet(QString::fromUtf8(""));
+
+        gridLayout_20->addWidget(projection_type, 0, 1, 1, 1);
+
+
+        gridLayout_18->addWidget(groupBox_pr_type, 0, 0, 1, 1);
+
+        groupBox_trash = new QGroupBox(groupBox_tool_menu);
+        groupBox_trash->setObjectName(QString::fromUtf8("groupBox_trash"));
+        groupBox_trash->setMinimumSize(QSize(0, 0));
+        groupBox_trash->setStyleSheet(QString::fromUtf8(""));
+        gridLayout_2 = new QGridLayout(groupBox_trash);
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
+        pushButton_select_name = new QPushButton(groupBox_trash);
+        pushButton_select_name->setObjectName(QString::fromUtf8("pushButton_select_name"));
+        pushButton_select_name->setMinimumSize(QSize(80, 25));
+        pushButton_select_name->setMaximumSize(QSize(16777215, 25));
+        pushButton_select_name->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    border: 2px;\n"
+"    border-radius: 6px;\n"
+"   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,\n"
+"                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);\n"
+"    min-width: 80px;\n"
+"	color: #C5D0E6;\n"
+"}\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\n"
+"                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,\n"
+"                                stop: 0.5 #7000A8, stop: 1.0 #47006B);\n"
+"} "));
+
+        gridLayout_2->addWidget(pushButton_select_name, 0, 0, 1, 1);
+
+
+        gridLayout_18->addWidget(groupBox_trash, 0, 2, 1, 1);
+
+
+        gridLayout->addWidget(groupBox_tool_menu, 0, 0, 1, 3);
 
 
         retranslateUi(MainWindow);
@@ -1087,19 +1120,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Widget", nullptr));
         hz->setText(QString());
-        groupBox_6->setTitle(QString());
-        groupBox_9->setTitle(QString());
-        pushButton_screenshot->setText(QCoreApplication::translate("MainWindow", "Capture picture", nullptr));
-        pushButton_gif->setText(QCoreApplication::translate("MainWindow", "Record GIF", nullptr));
-        groupBox_10->setTitle(QString());
-        label_42->setText(QCoreApplication::translate("MainWindow", "Projection type", nullptr));
-        projection_type->setItemText(0, QCoreApplication::translate("MainWindow", "Central", nullptr));
-        projection_type->setItemText(1, QCoreApplication::translate("MainWindow", "Parallel", nullptr));
-
-        groupBox_22->setTitle(QString());
-        pushButton_select_name->setText(QCoreApplication::translate("MainWindow", "Select File", nullptr));
-        groupBox_5->setTitle(QString());
-        groupBox_23->setTitle(QString());
+        groupBox_left->setTitle(QString());
+        groupBox_settings->setTitle(QString());
         label_24->setText(QCoreApplication::translate("MainWindow", "Blue", nullptr));
         label_25->setText(QCoreApplication::translate("MainWindow", "Green", nullptr));
         label_26->setText(QCoreApplication::translate("MainWindow", "Red", nullptr));
@@ -1120,7 +1142,7 @@ public:
         label_49->setText(QCoreApplication::translate("MainWindow", "Size", nullptr));
         settings_box->setItemText(settings_box->indexOf(page_3), QCoreApplication::translate("MainWindow", "Vertexes", nullptr));
         label_22->setText(QCoreApplication::translate("MainWindow", "Position", nullptr));
-        groupBox_24->setTitle(QString());
+        groupBox_position->setTitle(QString());
         label_33->setText(QCoreApplication::translate("MainWindow", "Z", nullptr));
         label_34->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_35->setText(QCoreApplication::translate("MainWindow", "Y", nullptr));
@@ -1135,7 +1157,7 @@ public:
         groupBox->setTitle(QString());
         groupBox_7->setTitle(QString());
         label_20->setText(QCoreApplication::translate("MainWindow", "Scale:", nullptr));
-        groupBox_11->setTitle(QString());
+        groupBox_object_info->setTitle(QString());
         label_14->setText(QCoreApplication::translate("MainWindow", "Edges", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Polygons", nullptr));
         label_19->setText(QCoreApplication::translate("MainWindow", "Vertices", nullptr));
@@ -1145,7 +1167,7 @@ public:
         groupBox_8->setTitle(QString());
         label_12->setText(QCoreApplication::translate("MainWindow", "Max", nullptr));
         label_13->setText(QCoreApplication::translate("MainWindow", "Min", nullptr));
-        groupBox_28->setTitle(QString());
+        groupBox_scaling->setTitle(QString());
         pushButton_sc_z_plus->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         pushButton_sc_y_minus->setText(QCoreApplication::translate("MainWindow", "-", nullptr));
         label_44->setText(QCoreApplication::translate("MainWindow", "Y", nullptr));
@@ -1158,6 +1180,17 @@ public:
         label_45->setText(QCoreApplication::translate("MainWindow", "X", nullptr));
         label_47->setText(QCoreApplication::translate("MainWindow", "Value", nullptr));
         label_21->setText(QCoreApplication::translate("MainWindow", "Object info", nullptr));
+        groupBox_tool_menu->setTitle(QString());
+        groupBox_capture->setTitle(QString());
+        pushButton_screenshot->setText(QCoreApplication::translate("MainWindow", "Capture picture", nullptr));
+        pushButton_gif->setText(QCoreApplication::translate("MainWindow", "Record GIF", nullptr));
+        groupBox_pr_type->setTitle(QString());
+        label_42->setText(QCoreApplication::translate("MainWindow", "Projection type", nullptr));
+        projection_type->setItemText(0, QCoreApplication::translate("MainWindow", "Central", nullptr));
+        projection_type->setItemText(1, QCoreApplication::translate("MainWindow", "Parallel", nullptr));
+
+        groupBox_trash->setTitle(QString());
+        pushButton_select_name->setText(QCoreApplication::translate("MainWindow", "Select File", nullptr));
     } // retranslateUi
 
 };

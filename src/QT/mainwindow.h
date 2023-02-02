@@ -71,22 +71,9 @@ class MainWindow : public QOpenGLWidget {
   int framCountE;
 
  private slots:
-//  void on_pushButton_mv_x_plus_clicked();
-//  void on_pushButton_mv_x_minus_clicked();
-//  void on_pushButton_mv_y_plus_clicked();
-//  void on_pushButton_mv_y_minus_clicked();
-//  void on_pushButton_mv_z_minus_clicked();
-//  void on_pushButton_mv_z_plus_clicked();
-//  void on_pushButton_rt_x_plus_clicked();
-//  void on_pushButton_rt_x_minus_clicked();
-//  void on_pushButton_rt_y_plus_clicked();
-//  void on_pushButton_rt_y_minus_clicked();
-//  void on_pushButton_rt_z_plus_clicked();
-//  void on_pushButton_rt_z_minus_clicked();
   void on_projection_type_activated();
   void on_spinBox_vertexes_size_valueChanged();
   void on_spinBox_edges_size_valueChanged();
-  void on_comboBox_edges_type_activated();
   void on_pushButton_select_name_clicked();
   void on_pushButton_save_settings_clicked();
   void on_pushButton_screenshot_clicked();
@@ -111,11 +98,9 @@ class MainWindow : public QOpenGLWidget {
   void gif_timer();
   void error_message(QString message);
 
-//  void on_pushButton_sc_all_plus_clicked();
   void on_pushButton_sc_x_plus_clicked();
   void on_pushButton_sc_y_plus_clicked();
   void on_pushButton_sc_z_plus_clicked();
-//  void on_pushButton_sc_all_minus_clicked();
   void on_pushButton_sc_x_minus_clicked();
   void on_pushButton_sc_y_minus_clicked();
   void on_pushButton_sc_z_minus_clicked();
@@ -151,6 +136,24 @@ class MainWindow : public QOpenGLWidget {
   void on_verticalScrollBar_valueChanged(int value);
 
   void on_verticalScrollBar_sliderReleased();
+
+  void on_spinBox_bgr_R_valueChanged(int arg1);
+
+  void on_spinBox_bgr_G_valueChanged(int arg1);
+
+  void on_spinBox_bgr_B_valueChanged(int arg1);
+
+  void on_spinBox_edges_R_valueChanged(int arg1);
+
+  void on_spinBox_edges_G_valueChanged(int arg1);
+
+  void on_spinBox_edges_B_valueChanged(int arg1);
+
+  void on_spinBox_vertexes_R_valueChanged(int arg1);
+
+  void on_spinBox_vertexes_G_valueChanged(int arg1);
+
+  void on_spinBox_vertexes_B_valueChanged(int arg1);
 
 private:
   Ui::MainWindow *ui;

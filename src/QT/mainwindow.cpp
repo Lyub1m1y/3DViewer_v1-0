@@ -87,8 +87,8 @@ void MainWindow::on_pushButton_reset_clicked() {
 void MainWindow::mousePressEvent(QMouseEvent* mo) { mPos = mo->pos(); }
 
 void MainWindow::mouseMoveEvent(QMouseEvent* mo) {
-  xRot = 1 / M_PI * (mo->pos().y() - mPos.y());
-  yRot = 1 / M_PI * (mo->pos().x() - mPos.x());
+  xRot = 1 / M_PI * (mo->pos().y() - xRot);
+  yRot = 1 / M_PI * (mo->pos().x() - yRot);
   update();
 }
 
@@ -313,53 +313,57 @@ void MainWindow::loadSettings() {
 // bgr color
 void MainWindow::on_horizontalScrollBar_bgr_R_valueChanged(int value) {
   bgrClrR = ((double)value) / 100.0;
-  ui->spinBox_bgr_R->setValue(bgrClrR);
+  ui->spinBox_bgr_R->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_bgr_G_valueChanged(int value) {
   bgrClrG = ((double)value) / 100.0;
-  ui->spinBox_bgr_G->setValue(bgrClrG);
+  ui->spinBox_bgr_G->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_bgr_B_valueChanged(int value) {
   bgrClrB = ((double)value) / 100.0;
-  ui->spinBox_bgr_B->setValue(bgrClrB);
+  ui->spinBox_bgr_B->setValue(value);
   update();
 }
 
 // edges color
 void MainWindow::on_horizontalScrollBar_edges_R_valueChanged(int value) {
   edgClrR = ((double)value) / 100.0;
-  ui->spinBox_edges_R->setValue(edgClrR);
+  ui->spinBox_edges_R->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_edges_G_valueChanged(int value) {
   edgClrG = ((double)value) / 100.0;
-  ui->spinBox_edges_G->setValue(edgClrG);
+  ui->spinBox_edges_G->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_edges_B_valueChanged(int value) {
   edgClrB = ((double)value) / 100.0;
+  ui->spinBox_edges_B->setValue(value);
   update();
 }
 
 // vertexes color
 void MainWindow::on_horizontalScrollBar_vertexes_R_valueChanged(int value) {
   vertClrR = (double)value / 100.0;
+  ui->spinBox_vertexes_R->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_vertexes_G_valueChanged(int value) {
   vertClrG = (double)value / 100.0;
+  ui->spinBox_vertexes_G->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_vertexes_B_valueChanged(int value) {
   vertClrB = (double)value / 100.0;
+  ui->spinBox_vertexes_B->setValue(value);
   update();
 }
 
@@ -368,8 +372,6 @@ void MainWindow::on_projection_type_activated() { update(); }
 void MainWindow::on_spinBox_vertexes_size_valueChanged() { update(); }
 
 void MainWindow::on_spinBox_edges_size_valueChanged() { update(); }
-
-void MainWindow::on_comboBox_edges_type_activated() { update(); }
 
 void MainWindow::on_pushButton_save_settings_clicked() { saveSettings(); }
 
@@ -476,5 +478,59 @@ void MainWindow::on_verticalScrollBar_sliderReleased()
     scaling(&structData, qvalue, ALL);
     ui->verticalScrollBar->setValue(0);
     update();
+}
+
+
+void MainWindow::on_spinBox_bgr_R_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_bgr_R->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_bgr_G_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_bgr_G->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_bgr_B_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_bgr_B->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_edges_R_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_edges_R->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_edges_G_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_edges_G->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_edges_B_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_edges_B->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_vertexes_R_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_vertexes_R->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_vertexes_G_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_vertexes_G->setValue(arg1);
+}
+
+
+void MainWindow::on_spinBox_vertexes_B_valueChanged(int arg1)
+{
+    ui->horizontalScrollBar_vertexes_B->setValue(arg1);
 }
 
