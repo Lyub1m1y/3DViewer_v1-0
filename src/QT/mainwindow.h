@@ -46,6 +46,8 @@ class MainWindow : public QOpenGLWidget {
   QString file;
 
   float xRot, yRot, zRot;
+  float mv_value_X, mv_value_Y, mv_value_Z;
+  double rot_value_X, rot_value_Y, rot_value_Z, qvalue;
 
   QPoint mPos;
   void initFile(char *path);
@@ -55,6 +57,7 @@ class MainWindow : public QOpenGLWidget {
   void initializeGL() override;
   void resizeGL(int w, int h) override;
   void paintGL() override;
+  void wheelEvent(QWheelEvent*event) override;
 
   void saveSettings();
   void loadSettings();
@@ -68,18 +71,18 @@ class MainWindow : public QOpenGLWidget {
   int framCountE;
 
  private slots:
-  void on_pushButton_mv_x_plus_clicked();
-  void on_pushButton_mv_x_minus_clicked();
-  void on_pushButton_mv_y_plus_clicked();
-  void on_pushButton_mv_y_minus_clicked();
-  void on_pushButton_mv_z_minus_clicked();
-  void on_pushButton_mv_z_plus_clicked();
-  void on_pushButton_rt_x_plus_clicked();
-  void on_pushButton_rt_x_minus_clicked();
-  void on_pushButton_rt_y_plus_clicked();
-  void on_pushButton_rt_y_minus_clicked();
-  void on_pushButton_rt_z_plus_clicked();
-  void on_pushButton_rt_z_minus_clicked();
+//  void on_pushButton_mv_x_plus_clicked();
+//  void on_pushButton_mv_x_minus_clicked();
+//  void on_pushButton_mv_y_plus_clicked();
+//  void on_pushButton_mv_y_minus_clicked();
+//  void on_pushButton_mv_z_minus_clicked();
+//  void on_pushButton_mv_z_plus_clicked();
+//  void on_pushButton_rt_x_plus_clicked();
+//  void on_pushButton_rt_x_minus_clicked();
+//  void on_pushButton_rt_y_plus_clicked();
+//  void on_pushButton_rt_y_minus_clicked();
+//  void on_pushButton_rt_z_plus_clicked();
+//  void on_pushButton_rt_z_minus_clicked();
   void on_projection_type_activated();
   void on_spinBox_vertexes_size_valueChanged();
   void on_spinBox_edges_size_valueChanged();
@@ -108,18 +111,48 @@ class MainWindow : public QOpenGLWidget {
   void gif_timer();
   void error_message(QString message);
 
-  void on_pushButton_sc_all_plus_clicked();
+//  void on_pushButton_sc_all_plus_clicked();
   void on_pushButton_sc_x_plus_clicked();
   void on_pushButton_sc_y_plus_clicked();
   void on_pushButton_sc_z_plus_clicked();
-  void on_pushButton_sc_all_minus_clicked();
+//  void on_pushButton_sc_all_minus_clicked();
   void on_pushButton_sc_x_minus_clicked();
   void on_pushButton_sc_y_minus_clicked();
   void on_pushButton_sc_z_minus_clicked();
 
   void on_pushButton_reset_clicked();
 
- private:
+
+
+  void on_horizontalScrollBar_mv_x_valueChanged(int value);
+
+  void on_horizontalScrollBar_mv_x_sliderReleased();
+
+  void on_horizontalScrollBar_mv_y_valueChanged(int value);
+
+  void on_horizontalScrollBar_mv_y_sliderReleased();
+
+  void on_horizontalScrollBar_mv_z_valueChanged(int value);
+
+  void on_horizontalScrollBar_mv_z_sliderReleased();
+
+  void on_horizontalScrollBar_rot_x_valueChanged(int value);
+
+  void on_horizontalScrollBar_rot_x_sliderReleased();
+
+  void on_horizontalScrollBar_rot_y_sliderReleased();
+
+  void on_horizontalScrollBar_rot_y_valueChanged(int value);
+
+  void on_horizontalScrollBar_rot_z_valueChanged(int value);
+
+  void on_horizontalScrollBar_rot_z_sliderReleased();
+
+  void on_verticalScrollBar_valueChanged(int value);
+
+  void on_verticalScrollBar_sliderReleased();
+
+private:
   Ui::MainWindow *ui;
 
   int numberFps;
