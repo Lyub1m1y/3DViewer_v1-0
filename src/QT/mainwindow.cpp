@@ -3,8 +3,9 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget* parent)
-    : QOpenGLWidget(parent), ui(new Ui::MainWindow) {
+    : QOpenGLWidget(parent), ui(new Ui::MainWindow)  {
   ui->setupUi(this);
+
 
   settings = new QSettings(this);
   loadSettings();

@@ -38,18 +38,18 @@
 
 QToolBox::tab {
  background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
     border-radius: 5px;
-    color: #FFFFFF;
+    color: #C5D0E6;
 }
 
 QToolBox::tab:selected { 
     font: italic;
     color: white;
     background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
+                                stop: 0 #BEA2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #001F8A);
 }
 QGroupBox {
 	background: #292929;
@@ -61,7 +61,7 @@ QGroupBox#groupBox_tool_menu,
 QGroupBox#groupBox_pr_type,
 QGroupBox#groupBox_trash, 
 QGroupBox#groupBox_capture {
-	background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 #474747, stop:0.995098 #949494);
+	background: qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0,  stop: 0.0 #47006B, stop:0.1 #474747, stop:1.0 #949494);
 	border: none;
 }
 
@@ -137,7 +137,21 @@ QSpinBox::up-button:pressed {
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.3 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #001F8A);
+    min-width: 60px;
+	color: #C5D0E6;
+}
+
+QPushButton:pressed {
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.3 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
+} </string>
      </property>
      <property name="title">
       <string/>
@@ -218,7 +232,7 @@ QSpinBox::up-button:pressed {
             <string notr="true"/>
            </property>
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="page">
             <property name="geometry">
@@ -904,21 +918,7 @@ QSpinBox::up-button:pressed {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-    min-width: 60px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-} </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Save settings</string>
@@ -940,21 +940,7 @@ QPushButton:pressed {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-    min-width: 60px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-} </string>
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>Reset position</string>
@@ -1093,6 +1079,13 @@ border: none;</string>
            </property>
           </widget>
          </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_info_v">
+           <property name="text">
+            <string>012345</string>
+           </property>
+          </widget>
+         </item>
          <item row="2" column="0" colspan="2">
           <widget class="QLabel" name="label_15">
            <property name="text">
@@ -1107,20 +1100,6 @@ border: none;</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="label_info_e">
-           <property name="text">
-            <string>012345</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="label_info_v">
-           <property name="text">
-            <string>012345</string>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="2">
           <widget class="QLabel" name="label_info_p">
            <property name="text">
@@ -1128,7 +1107,301 @@ border: none;</string>
            </property>
           </widget>
          </item>
+         <item row="1" column="2">
+          <widget class="QLabel" name="label_info_e">
+           <property name="text">
+            <string>012345</string>
+           </property>
+          </widget>
+         </item>
         </layout>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="3">
+       <widget class="QGroupBox" name="groupBox_scaling">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>250</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>400</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_21">
+         <property name="leftMargin">
+          <number>12</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>12</number>
+         </property>
+         <property name="bottomMargin">
+          <number>12</number>
+         </property>
+         <property name="horizontalSpacing">
+          <number>10</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>0</number>
+         </property>
+         <item row="7" column="1">
+          <widget class="QPushButton" name="pushButton_sc_z_plus">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
+    min-width: 60px;
+    color: #C5D0E6;
+}
+
+QPushButton:pressed {
+
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.4 #464451,
+                                stop: 0.5 #464451, stop: 1.0 #001F8A);
+} </string>
+           </property>
+           <property name="text">
+            <string>+</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QPushButton" name="pushButton_sc_y_minus">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.3 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #001F8A);
+    min-width: 60px;
+	color: #C5D0E6;
+}
+
+QPushButton:pressed {
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
+} </string>
+           </property>
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0" colspan="2">
+          <widget class="QLabel" name="label_44">
+           <property name="text">
+            <string>Y</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0" colspan="2">
+          <widget class="QLabel" name="label_43">
+           <property name="text">
+            <string>Z</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QPushButton" name="pushButton_sc_y_plus">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
+    min-width: 60px;
+    color: #C5D0E6;
+}
+
+QPushButton:pressed {
+
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.4 #464451,
+                                stop: 0.5 #464451, stop: 1.0 #001F8A);
+} </string>
+           </property>
+           <property name="text">
+            <string>+</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QPushButton" name="pushButton_sc_x_minus">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.3 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #001F8A);
+    min-width: 60px;
+	color: #C5D0E6;
+}
+
+QPushButton:pressed {
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
+} </string>
+           </property>
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0" colspan="2">
+          <widget class="QLabel" name="label_46">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>14245</height>
+            </size>
+           </property>
+           <property name="font">
+            <font>
+             <pointsize>18</pointsize>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Scaling coordinates</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QPushButton" name="pushButton_sc_x_plus">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
+    min-width: 60px;
+    color: #C5D0E6;
+}
+
+QPushButton:pressed {
+
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.4 #464451,
+                                stop: 0.5 #464451, stop: 1.0 #001F8A);
+} </string>
+           </property>
+           <property name="text">
+            <string>+</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QPushButton" name="pushButton_sc_z_minus">
+           <property name="styleSheet">
+            <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.3 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #001F8A);
+    min-width: 60px;
+	color: #C5D0E6;
+}
+
+QPushButton:pressed {
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
+} </string>
+           </property>
+           <property name="text">
+            <string>-</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QLabel" name="label_45">
+           <property name="text">
+            <string>X</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QDoubleSpinBox" name="doubleSpinBox_sc_value">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="minimum">
+            <double>0.100000000000000</double>
+           </property>
+           <property name="maximum">
+            <double>0.900000000000000</double>
+           </property>
+           <property name="singleStep">
+            <double>0.100000000000000</double>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="label_47">
+           <property name="text">
+            <string>Value</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QLabel" name="label_21">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>18</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Object info</string>
+        </property>
        </widget>
       </item>
       <item row="3" column="1">
@@ -1203,290 +1476,6 @@ border: none;</string>
         </layout>
        </widget>
       </item>
-      <item row="4" column="0" colspan="3">
-       <widget class="QGroupBox" name="groupBox_scaling">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>250</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>400</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="title">
-         <string/>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_21">
-         <property name="leftMargin">
-          <number>12</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>12</number>
-         </property>
-         <property name="bottomMargin">
-          <number>12</number>
-         </property>
-         <property name="horizontalSpacing">
-          <number>10</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>0</number>
-         </property>
-         <item row="7" column="1">
-          <widget class="QPushButton" name="pushButton_sc_z_plus">
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-    min-width: 40px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-}</string>
-           </property>
-           <property name="text">
-            <string>+</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QPushButton" name="pushButton_sc_y_minus">
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-    min-width: 40px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-} </string>
-           </property>
-           <property name="text">
-            <string>-</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0" colspan="2">
-          <widget class="QLabel" name="label_44">
-           <property name="text">
-            <string>Y</string>
-           </property>
-          </widget>
-         </item>
-         <item row="6" column="0" colspan="2">
-          <widget class="QLabel" name="label_43">
-           <property name="text">
-            <string>Z</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QPushButton" name="pushButton_sc_y_plus">
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-    min-width: 40px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color:   qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-}</string>
-           </property>
-           <property name="text">
-            <string>+</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QPushButton" name="pushButton_sc_x_minus">
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-    min-width: 40px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-} </string>
-           </property>
-           <property name="text">
-            <string>-</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0" colspan="2">
-          <widget class="QLabel" name="label_46">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>20</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>16777215</width>
-             <height>14245</height>
-            </size>
-           </property>
-           <property name="font">
-            <font>
-             <pointsize>18</pointsize>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true"/>
-           </property>
-           <property name="text">
-            <string>Scaling coordinates</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QPushButton" name="pushButton_sc_x_plus">
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-    min-width: 40px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-}</string>
-           </property>
-           <property name="text">
-            <string>+</string>
-           </property>
-          </widget>
-         </item>
-         <item row="7" column="0">
-          <widget class="QPushButton" name="pushButton_sc_z_minus">
-           <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-    min-width: 40px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-} </string>
-           </property>
-           <property name="text">
-            <string>-</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0" colspan="2">
-          <widget class="QLabel" name="label_45">
-           <property name="text">
-            <string>X</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QDoubleSpinBox" name="doubleSpinBox_sc_value">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="minimum">
-            <double>0.100000000000000</double>
-           </property>
-           <property name="maximum">
-            <double>0.900000000000000</double>
-           </property>
-           <property name="singleStep">
-            <double>0.100000000000000</double>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="label_47">
-           <property name="text">
-            <string>Value</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="3">
-       <widget class="QLabel" name="label_21">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>20</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>18</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Object info</string>
-        </property>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -1532,7 +1521,22 @@ QPushButton:pressed {
       <item row="0" column="1">
        <widget class="QGroupBox" name="groupBox_capture">
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">QPushButton {
+    border: 2px;
+    border-radius: 6px;
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #A0A0A4,
+                                stop: 0.8 #A0A0A4, stop: 1.0 #47006B);
+    min-width: 60px;
+	color: #26252D;
+}
+
+QPushButton:pressed {
+
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.4 #464451,
+                                stop: 0.5 #464451, stop: 1.0 #001F8A);
+} </string>
         </property>
         <property name="title">
          <string/>
@@ -1560,7 +1564,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="pushButton_screenshot">
            <property name="minimumSize">
             <size>
-             <width>80</width>
+             <width>60</width>
              <height>10</height>
             </size>
            </property>
@@ -1571,21 +1575,7 @@ QPushButton:pressed {
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
- 	background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-    min-width: 80px;
-color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>Capture picture</string>
@@ -1596,7 +1586,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="pushButton_gif">
            <property name="minimumSize">
             <size>
-             <width>80</width>
+             <width>60</width>
              <height>25</height>
             </size>
            </property>
@@ -1607,21 +1597,7 @@ QPushButton:pressed {
             </size>
            </property>
            <property name="styleSheet">
-            <string notr="true">QPushButton {
-    border: 2px;
-    border-radius: 6px;
-	 background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
-    min-width: 80px;
-	color: #C5D0E6;
-}
-
-QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-}</string>
+            <string notr="true"/>
            </property>
            <property name="text">
             <string>Record GIF</string>
@@ -1701,7 +1677,7 @@ QPushButton:pressed {
           <widget class="QPushButton" name="pushButton_select_name">
            <property name="minimumSize">
             <size>
-             <width>80</width>
+             <width>60</width>
              <height>25</height>
             </size>
            </property>
@@ -1715,17 +1691,17 @@ QPushButton:pressed {
             <string notr="true">QPushButton {
     border: 2px;
     border-radius: 6px;
-   background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #A8BCFF, stop: 0.4 #3361FF,
-                                stop: 0.5 #0033E0, stop: 1.0 #001F8A);
-    min-width: 80px;
+    background:  qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #BEA2D0, stop: 0.3 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #001F8A);
+    min-width: 60px;
 	color: #C5D0E6;
 }
 
 QPushButton:pressed {
-    background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
-                                stop: 0 #AF0FFF, stop: 0.4 #8100C2,
-                                stop: 0.5 #7000A8, stop: 1.0 #47006B);
+ background:qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                stop: 0 #A2A2D0, stop: 0.2 #464451,
+                                stop: 0.8 #464451, stop: 1.0 #47006B);
 } </string>
            </property>
            <property name="text">
