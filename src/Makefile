@@ -3,16 +3,12 @@
 OS := $(shell uname -s)
 SRC =  Model/viewer.c
 SRC_FOR_TEST =  Model/viewer.c
-OBJ = $(SRC:%.c=%.o)
 
 CC = gcc -std=c11
 
-# CFLAGS	= -Wall -Werror -Wextra
-CFLAGS	=
-FLAGS_PLATFORM = -lcheck
+CFLAGS	= -Wall -Werror -Wextra
 
-TEST = Test/test_viewer.c
-FLAGS_PLATFORM = -lcheck
+TEST = Test/*.c
 
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
 REPORT = GcovReport
