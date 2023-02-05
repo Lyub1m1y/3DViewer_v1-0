@@ -22,7 +22,7 @@ int parser(data_t* data, char* fileName) {
       }
       fclose(f);
     } else {
-      status = FAIL;
+      status = FAIL;  // LCOV_EXCL_LINE
     }
   } else {
     status = FAIL;

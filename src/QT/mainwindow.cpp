@@ -55,7 +55,7 @@ void MainWindow::on_pushButton_select_name_clicked() {
                                       "..\\3DViewer_v1-0\\objects\\");
   QFileInfo fileinfo(file);
   QString objName = fileinfo.fileName();
-  ui->label_object_name->setText(objName);
+  this->setWindowTitle(objName);
   QByteArray ba = file.toLocal8Bit();
   char* path = ba.data();
   initFile(path);
@@ -87,8 +87,8 @@ void MainWindow::on_pushButton_reset_clicked() {
 void MainWindow::mousePressEvent(QMouseEvent* mo) { mPos = mo->pos(); }
 
 void MainWindow::mouseMoveEvent(QMouseEvent* mo) {
-  xRot = 1 / M_PI * (mo->pos().y() - mPos.y());
-  yRot = 1 / M_PI * (mo->pos().x() - mPos.x());
+  xRot = 1 / M_PI * (mo->pos().y() - xRot);
+  yRot = 1 / M_PI * (mo->pos().x() - yRot);
   update();
 }
 
@@ -102,9 +102,9 @@ void MainWindow::draw() {
   // draw edges
   glLineWidth(0.1);
   glColor3f(edgClrR, edgClrG, edgClrB);
-  if (ui->comboBox_edges_type->currentIndex() == 0) {
+  if (ui->radioButton_line->isChecked()) {
     glDisable(GL_LINE_STIPPLE);
-  } else if (ui->comboBox_edges_type->currentIndex() == 1) {
+  } else if (ui->radioButton_stipple->isChecked()) {
     glLineStipple(10, 0x3333);
     glEnable(GL_LINE_STIPPLE);
   }
@@ -138,71 +138,26 @@ void MainWindow::draw() {
   update();
 }
 
-void MainWindow::on_pushButton_mv_x_plus_clicked() {
-  moving(&structData, ui->doubleSpinBox_mv_value->value(), 0);
-  update();
-}
-
-void MainWindow::on_pushButton_mv_x_minus_clicked() {
-  moving(&structData, ui->doubleSpinBox_mv_value->value() * -1, 0);
-  update();
-}
-
-void MainWindow::on_pushButton_mv_y_plus_clicked() {
-  moving(&structData, ui->doubleSpinBox_mv_value->value(), 1);
-  update();
-}
-
-void MainWindow::on_pushButton_mv_y_minus_clicked() {
-  moving(&structData, ui->doubleSpinBox_mv_value->value() * -1, 1);
-  update();
-}
-
-void MainWindow::on_pushButton_mv_z_minus_clicked() {
-  moving(&structData, ui->doubleSpinBox_mv_value->value() * -1, 2);
-  update();
-}
-
-void MainWindow::on_pushButton_mv_z_plus_clicked() {
-  moving(&structData, ui->doubleSpinBox_mv_value->value(), 2);
-  update();
-}
-
-void MainWindow::on_pushButton_sc_all_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_all_value->value();
-  scaling(&structData, value, ALL);
-  update();
-}
-
 void MainWindow::on_pushButton_sc_x_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_x_value->value();
+  double value = 1 + ui->doubleSpinBox_sc_value->value();
   scaling(&structData, value, X);
   update();
 }
 
 void MainWindow::on_pushButton_sc_y_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_y_value->value();
+  double value = 1 + ui->doubleSpinBox_sc_value->value();
   scaling(&structData, value, Y);
   update();
 }
 
 void MainWindow::on_pushButton_sc_z_plus_clicked() {
-  double value = 1 + ui->doubleSpinBox_sc_z_value->value();
+  double value = 1 + ui->doubleSpinBox_sc_value->value();
   scaling(&structData, value, Z);
   update();
 }
 
-void MainWindow::on_pushButton_sc_all_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_all_value->value();
-  if (value == 0) {
-    value = 0.1;
-  }
-  scaling(&structData, value, ALL);
-  update();
-}
-
 void MainWindow::on_pushButton_sc_x_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_x_value->value();
+  double value = 1 - ui->doubleSpinBox_sc_value->value();
   if (value == 0) {
     value = 0.1;
   }
@@ -211,7 +166,7 @@ void MainWindow::on_pushButton_sc_x_minus_clicked() {
 }
 
 void MainWindow::on_pushButton_sc_y_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_y_value->value();
+  double value = 1 - ui->doubleSpinBox_sc_value->value();
   if (value == 0) {
     value = 0.1;
   }
@@ -220,7 +175,7 @@ void MainWindow::on_pushButton_sc_y_minus_clicked() {
 }
 
 void MainWindow::on_pushButton_sc_z_minus_clicked() {
-  double value = 1 - ui->doubleSpinBox_sc_z_value->value();
+  double value = 1 - ui->doubleSpinBox_sc_value->value();
   if (value == 0) {
     value = 0.1;
   }
@@ -280,7 +235,9 @@ void MainWindow::gif_creator() {
 
 void MainWindow::saveSettings() {
   settings->setValue("projection_type", ui->projection_type->currentIndex());
-  settings->setValue("edges_type", ui->comboBox_edges_type->currentIndex());
+  settings->setValue("edges_type_line", ui->radioButton_line->isChecked());
+  settings->setValue("edges_type_stipple",
+                     ui->radioButton_stipple->isChecked());
 
   settings->setValue("radioButton_norm", ui->radioButton_norm->isChecked());
   settings->setValue("radioButton_circles",
@@ -315,8 +272,10 @@ void MainWindow::saveSettings() {
 void MainWindow::loadSettings() {
   ui->projection_type->setCurrentIndex(
       settings->value("projection_type", "0").toInt());
-  ui->comboBox_edges_type->setCurrentIndex(
-      settings->value("edges_type", "0").toInt());
+  ui->radioButton_line->setChecked(
+      settings->value("edges_type_line", true).toBool());
+  ui->radioButton_stipple->setChecked(
+      settings->value("edges_type_stipple", true).toBool());
 
   ui->radioButton_norm->setChecked(
       settings->value("radioButton_norm", true).toBool());
@@ -352,81 +311,60 @@ void MainWindow::loadSettings() {
       settings->value("horizontalScrollBar_vertexes_B").toInt());
 }
 
-void MainWindow::on_pushButton_rt_x_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), X);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_x_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, X);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_y_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Y);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_y_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Y);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_z_plus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value(), Z);
-  update();
-}
-
-void MainWindow::on_pushButton_rt_z_minus_clicked() {
-  affineTransforms(&structData, ui->doubleSpinBox_rt_value->value() * -1, Z);
-  update();
-}
-
 // bgr color
 void MainWindow::on_horizontalScrollBar_bgr_R_valueChanged(int value) {
   bgrClrR = ((double)value) / 100.0;
+  ui->spinBox_bgr_R->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_bgr_G_valueChanged(int value) {
   bgrClrG = ((double)value) / 100.0;
+  ui->spinBox_bgr_G->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_bgr_B_valueChanged(int value) {
   bgrClrB = ((double)value) / 100.0;
+  ui->spinBox_bgr_B->setValue(value);
   update();
 }
 
 // edges color
 void MainWindow::on_horizontalScrollBar_edges_R_valueChanged(int value) {
   edgClrR = ((double)value) / 100.0;
+  ui->spinBox_edges_R->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_edges_G_valueChanged(int value) {
   edgClrG = ((double)value) / 100.0;
+  ui->spinBox_edges_G->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_edges_B_valueChanged(int value) {
   edgClrB = ((double)value) / 100.0;
+  ui->spinBox_edges_B->setValue(value);
   update();
 }
 
 // vertexes color
 void MainWindow::on_horizontalScrollBar_vertexes_R_valueChanged(int value) {
   vertClrR = (double)value / 100.0;
+  ui->spinBox_vertexes_R->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_vertexes_G_valueChanged(int value) {
   vertClrG = (double)value / 100.0;
+  ui->spinBox_vertexes_G->setValue(value);
   update();
 }
 
 void MainWindow::on_horizontalScrollBar_vertexes_B_valueChanged(int value) {
   vertClrB = (double)value / 100.0;
+  ui->spinBox_vertexes_B->setValue(value);
   update();
 }
 
@@ -436,6 +374,116 @@ void MainWindow::on_spinBox_vertexes_size_valueChanged() { update(); }
 
 void MainWindow::on_spinBox_edges_size_valueChanged() { update(); }
 
-void MainWindow::on_comboBox_edges_type_activated() { update(); }
-
 void MainWindow::on_pushButton_save_settings_clicked() { saveSettings(); }
+
+void MainWindow::on_horizontalScrollBar_mv_x_valueChanged(int value) {
+  mv_value_X = value / 10.0;
+}
+
+void MainWindow::on_horizontalScrollBar_mv_x_sliderReleased() {
+  moving(&structData, mv_value_X, 0);
+  ui->horizontalScrollBar_mv_x->setValue(0);
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_mv_y_valueChanged(int value) {
+  mv_value_Y = value / 10.0;
+}
+
+void MainWindow::on_horizontalScrollBar_mv_y_sliderReleased() {
+  moving(&structData, mv_value_Y, 0);
+  ui->horizontalScrollBar_mv_y->setValue(0);
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_mv_z_valueChanged(int value) {
+  mv_value_Z = value / 10.0;
+}
+
+void MainWindow::on_horizontalScrollBar_mv_z_sliderReleased() {
+  moving(&structData, mv_value_Z, 0);
+  ui->horizontalScrollBar_mv_z->setValue(0);
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_rot_x_valueChanged(int value) {
+  rot_value_X = value / 36.0;
+}
+
+void MainWindow::on_horizontalScrollBar_rot_x_sliderReleased() {
+  affineTransforms(&structData, rot_value_X, X);
+  ui->horizontalScrollBar_rot_x->setValue(0);
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_rot_y_sliderReleased() {
+  affineTransforms(&structData, rot_value_Y, Y);
+  ui->horizontalScrollBar_rot_y->setValue(0);
+  update();
+}
+
+void MainWindow::on_horizontalScrollBar_rot_y_valueChanged(int value) {
+  rot_value_Y = value / 36.0;
+}
+
+void MainWindow::on_horizontalScrollBar_rot_z_valueChanged(int value) {
+  rot_value_Z = value / 36.0;
+}
+
+void MainWindow::on_horizontalScrollBar_rot_z_sliderReleased() {
+  affineTransforms(&structData, rot_value_Z, Z);
+  ui->horizontalScrollBar_rot_z->setValue(0);
+  update();
+}
+
+void MainWindow::wheelEvent(QWheelEvent* event) {
+  double value = 1 + event->angleDelta().y() / 940.0;
+  scaling(&structData, value, ALL);
+  update();
+}
+
+void MainWindow::on_verticalScrollBar_valueChanged(int value) {
+  qvalue = (1 + value * -1 / 2500.0);
+}
+
+void MainWindow::on_verticalScrollBar_sliderReleased() {
+  scaling(&structData, qvalue, ALL);
+  ui->verticalScrollBar->setValue(0);
+  update();
+}
+
+void MainWindow::on_spinBox_bgr_R_valueChanged(int arg1) {
+  ui->horizontalScrollBar_bgr_R->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_bgr_G_valueChanged(int arg1) {
+  ui->horizontalScrollBar_bgr_G->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_bgr_B_valueChanged(int arg1) {
+  ui->horizontalScrollBar_bgr_B->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_edges_R_valueChanged(int arg1) {
+  ui->horizontalScrollBar_edges_R->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_edges_G_valueChanged(int arg1) {
+  ui->horizontalScrollBar_edges_G->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_edges_B_valueChanged(int arg1) {
+  ui->horizontalScrollBar_edges_B->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_vertexes_R_valueChanged(int arg1) {
+  ui->horizontalScrollBar_vertexes_R->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_vertexes_G_valueChanged(int arg1) {
+  ui->horizontalScrollBar_vertexes_G->setValue(arg1);
+}
+
+void MainWindow::on_spinBox_vertexes_B_valueChanged(int arg1) {
+  ui->horizontalScrollBar_vertexes_B->setValue(arg1);
+}
